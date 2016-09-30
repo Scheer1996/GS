@@ -8,8 +8,7 @@
 #ifndef _STACK_H
 #define _STACK_H
 
-#define E_STACK_OVERFLOW -1
-#define E_STACK_EMPTY -2
+#include "errors.h"
 
 /**
  * Adds value to the top of the stack if there is space.

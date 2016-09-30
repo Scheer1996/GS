@@ -9,12 +9,7 @@
 #define _INPUT_H
 
 #include "tokens.h"
-
-#ifndef E_OVERFLOW
-    #define E_OVERFLOW -1
-#endif /* E_OVERFLOW */
-
-#define E_INVALID_INPUT -2
+#include "errors.h"
 
 /**
  * Initializes the input
