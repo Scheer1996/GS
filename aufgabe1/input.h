@@ -12,17 +12,17 @@
 #include "errors.h"
 
 /**
- * Initializes the input
+ * @brief Initializes the input
  */
 void input_init(void);
 
 /**
- * Reads the next token from the keyboard
+ * @brief Reads the next token from the keyboard
  *
  * @param token will be modified to represent the next token if
  *              method returns with error code 0
  * @return error code
  */
-Token input_get_next_token(void);
+int input_get_next_token(Token*);
 
 #endif /* _INPUT_H */

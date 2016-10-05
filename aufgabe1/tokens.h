@@ -8,6 +8,8 @@
 #ifndef _TOKEN_H
 #define _TOKEN_H
 
+#include <stdbool.h>
+
 #define OP_ADD 1
 #define OP_SUBTRACT 2
 #define OP_MULTIPLY 3
@@ -19,7 +21,7 @@
 #define OP_REVERSE 9
 
 typedef struct {
-    int isOperator;
+    bool isOperator;
     int value;
 } Token;
 

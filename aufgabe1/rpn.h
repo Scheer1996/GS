@@ -12,10 +12,10 @@
 #include "errors.h"
 
 /**
- * Performs the necessary action to handle the token passed to it if method
- * returns with error code 0
+ * @brief Performs the necessary action to handle the token passed to it if method
+ *        returns with error code 0
  *
- * @param token – the token to handle
+ * @param token the token to handle
  * @return error code
  *
  */
