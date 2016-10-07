@@ -1,34 +1,54 @@
+/** ****************************************************************
+ * @file    input.c
+ * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
+ * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
+ * @version 1.0
+ * @date    07.10.2016
+ * @brief   Implementation of the Input module
+ *
+ * Provides methods to read user inputs from the touchscreen and converts them
+ * into Tokens to be handled by the RPN module.
+ ******************************************************************
+ */
 #include "input.h"
 #include "keypad.h"
 #include "output.h"
 #include <stdbool.h>
 
+/**
+ * The factor to increase @c number by when parsing
+ */
 #define FAKTOR 10
 
-/**
- * @brief Initializes the input
+/* ****************************************************************
+ * Initializes the input module
+ ******************************************************************
  */
 void input_init(void){
     Make_Touch_Pad();
 }
 
-/**
- * @brief Reads an input from the touchpad
+/** ****************************************************************
+ * @brief   Reads a character from the on screen keyboard
  *
- * @return the character read from the touchpad
+ * @return the character that was read
+ ******************************************************************
  */
 static char get_char(void){
     int code = Get_Touch_Pad_Input();
     return (char)code;
 }
 
-/**
- * @brief Converts character to Token
+/** ****************************************************************
+ * @brief   Converts a character to it's corresponding Token
  *
- * @param ch the character to convert
- * @param t adress of the Token which
+ * @param[in] ch the character to convert
+ * @param[out] t pointer where the generated Token is to be written to
  *
  * @return error code
+ * @retval 0 no error
+ * @retval E_INVALID_INPUT the character @c ch did not represent a valid Token
+ ******************************************************************
  */
 static int get_operator_token(char ch, Token* t){
     t->isOperator = true;
@@ -67,12 +87,9 @@ static int get_operator_token(char ch, Token* t){
     return 0;    
 }
 
-/**
- * @brief Reads the next token from the keyboard
- *
- * @param token will be modified to represent the next token if
- *              method returns with error code 0
- * @return error code
+/* ****************************************************************
+ * Generates the next Token from user input
+ ******************************************************************
  */
 int input_get_next_token(Token* token){
     // remember the following two between function calls

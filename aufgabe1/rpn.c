@@ -1,14 +1,28 @@
-/*
- * RPN
- *
- * Author: Moritz Höwer
- * Version: 1.1 - 01.10.2016
+/** ****************************************************************
+ * @file    rpn.c
+ * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
+ * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
+ * @version 1.0
+ * @date    07.10.2016
+ * @brief   Implementation for the RPN module
+ ******************************************************************
  */
 #include "rpn.h"
 #include "stack.h"
 #include <limits.h>
 #include <math.h>
 
+/** ****************************************************************
+ * @brief   Retrieves two operands from the stack
+ *
+ * @param [out] op1 pointer to where the first operand should be written
+ * @param [out] op2 pointer to where the seccond operand should be written
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND could not retrieve two operands
+ ******************************************************************
+ */
 static int get_two_operands(int* op1, int* op2){
 	// get first operand
 	if(stack_pop(op1)){
@@ -23,6 +37,16 @@ static int get_two_operands(int* op1, int* op2){
 	return 0;
 }
 
+/** ****************************************************************
+ * @brief   Adds the top two elements of the stack
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND less than two operands on the stack
+ * @retval E_OVERFLOW        the addition over- or underflowed the underlying
+ *                           @c int.
+ ******************************************************************
+ */
 static int add(void){
 	int op1, op2;
 	int res;
@@ -47,6 +71,16 @@ static int add(void){
 	return 0;
 }
 
+/** ****************************************************************
+ * @brief   Subtracts the top element of the stack from the one below it.
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND less than two operands on the stack
+ * @retval E_OVERFLOW        the subtraction over- or underflowed the
+ *                           underlying @c int.
+ ******************************************************************
+ */
 static int subtract(void){
 	int op1, op2;
 	int res;
@@ -71,6 +105,16 @@ static int subtract(void){
 	return 0;
 }
 
+/** ****************************************************************
+ * @brief   Multiplies the top two elements of the stack.
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND less than two operands on the stack
+ * @retval E_OVERFLOW        the multiplication over- or underflowed the
+ *                           underlying @c int.
+ ******************************************************************
+ */
 static int multiply(void){
 	int op1, op2;
 	int res;
@@ -95,6 +139,16 @@ static int multiply(void){
 	return 0;
 }
 
+/** ****************************************************************
+ * @brief   Divides the second element of the stack by the top one.
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND less than two operands on the stack
+ * @retval E_DIVIDE_0        the top value was 0, and we don't want to
+ *                           divide by 0...
+ ******************************************************************
+ */
 static int divide(void){
 	int op1, op2;
 	int res;
@@ -118,6 +172,14 @@ static int divide(void){
 	return 0;
 }
 
+/** ****************************************************************
+ * @brief   Reverses the top two elements of the stack.
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND less than two operands on the stack
+ ******************************************************************
+ */
 static int reverse(void){
 	int op1, op2;
 	
@@ -133,6 +195,16 @@ static int reverse(void){
 	return 0;
 }
 
+/** ****************************************************************
+ * @brief   Duplicates the top entry of the stack.
+ *
+ * @return error code
+ * @retval 0 no error
+ * @retval E_MISSING_OPERAND nothing on the stack
+ * @retval E_STACK_OVERFLOW  the stack is full and thus we can't add another
+ *                           element to it.
+ ******************************************************************
+ */
 static int duplicate(void){
 	int op;
 	// get operand
@@ -147,6 +219,10 @@ static int duplicate(void){
 	return stack_push(op);
 }
 
+/* ****************************************************************
+ * Processes the Token that is passed to it
+ ******************************************************************
+ */
 int rpn_process_token(Token token){
 	if(!token.isOperator){
 		return stack_push(token.value);
