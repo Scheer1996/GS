@@ -1,27 +1,29 @@
-/**
- ******************************************************************************
- * @file    	output.h
- * @author  	Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
- *              Philip Scheer (Philip.Scheer@haw-hamburg.de)
- *
+/** ****************************************************************
+ * @file    output.h
+ * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
+ * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    04.10.2016
- * @brief   Output
- *******************************************************************
+ * @date    07.10.2016
+ * @brief   Header for the Output module
+ ******************************************************************
  */
-#ifndef _OUTPUT_H
-#define _OUTPUT_H
+#ifndef OUTPUT_H
+#define OUTPUT_H
 
-
-/**
- * Displays a angle of rotation in Degrees
+/** ****************************************************************
+ * @brief Displays the angle of rotation on the screen.
+ *
+ * @param[in] angle the angle in degrees
+ ******************************************************************
  */
-void output_display_angle_of_rotation(double);
+void output_display_angle_of_rotation(double angle);
 
-/**
- * Displays a rotation speed in Degrees per Second
+/** ****************************************************************
+ * @brief Displays the speed of rotation on the screen.
+ *
+ * @param[in] speed the speed in degrees per second
+ ******************************************************************
  */
-void output_display_rotation_speed(double);
-
+void output_display_rotation_speed(double speed);
 
 #endif /* _OUTPUT_H */

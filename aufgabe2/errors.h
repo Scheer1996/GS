@@ -1,18 +1,16 @@
-/**
- ******************************************************************************
- * @file    	error.h
- * @author  	Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
- *              Philip Scheer (Philip.Scheer@haw-hamburg.de)
- *
+/** ****************************************************************
+ * @file    errors.h
+ * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
+ * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    05.10.2016
- * @brief   Errors
- *******************************************************************
+ * @date    07.10.2016
+ * @brief   Header for the error codes
+ ******************************************************************
  */
 
-#ifndef errors_h
-#define errors_h
+#ifndef ERRORS_H
+#define ERRORS_H
 
 
 
-#endif /* errors_h */
+#endif /* ERRORS_H */
