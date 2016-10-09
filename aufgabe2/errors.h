@@ -1,5 +1,5 @@
 /** ****************************************************************
- * @file    errors.h
+ * @file    aufgabe2/errors.h
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0

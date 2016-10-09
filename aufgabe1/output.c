@@ -1,5 +1,5 @@
 /** ****************************************************************
- * @file    output.c
+ * @file    aufgabe1/output.c
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0

@@ -1,5 +1,5 @@
 /** ****************************************************************
- * @file    rpn.c
+ * @file    aufgabe1/rpn.c
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
@@ -16,7 +16,7 @@
  * @brief   Retrieves two operands from the stack
  *
  * @param [out] op1 pointer to where the first operand should be written
- * @param [out] op2 pointer to where the seccond operand should be written
+ * @param [out] op2 pointer to where the second operand should be written
  *
  * @return error code
  * @retval 0 no error

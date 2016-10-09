@@ -1,5 +1,5 @@
 /** ****************************************************************
- * @file    rpn.h
+ * @file    aufgabe1/rpn.h
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
