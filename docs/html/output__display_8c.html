@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GSP - Entwicklerdokumentation: aufgabe2/output.c File Reference</title>
+<title>GSP - Entwicklerdokumentation: aufgabe2/output_display.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,7 +55,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('aufgabe2_2output_8c.html','');});
+$(document).ready(function(){initNavTree('output__display_8c.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
@@ -63,51 +63,51 @@ $(document).ready(function(){initNavTree('aufgabe2_2output_8c.html','');});
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">output.c File Reference</div>  </div>
+<div class="title">output_display.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implmentation of the Output module.  
+<p>Implementation of the Output Display module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="aufgabe2_2output_8h_source.html">output.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="output__display_8h_source.html">output_display.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;tft.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:af0f2173e3b202ddf5756531b4471dcb2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a>&#160;&#160;&#160;35</td></tr>
+<tr class="memitem:af0f2173e3b202ddf5756531b4471dcb2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a>&#160;&#160;&#160;35</td></tr>
 <tr class="separator:af0f2173e3b202ddf5756531b4471dcb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42b245d38fd6971c5eca09edc83e985b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#a42b245d38fd6971c5eca09edc83e985b">AOR_X</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:a42b245d38fd6971c5eca09edc83e985b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#a42b245d38fd6971c5eca09edc83e985b">AOR_X</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a42b245d38fd6971c5eca09edc83e985b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc5fd23c215e89a1d2b79d06a6fcd55a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#abc5fd23c215e89a1d2b79d06a6fcd55a">AOR_Y</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:abc5fd23c215e89a1d2b79d06a6fcd55a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#abc5fd23c215e89a1d2b79d06a6fcd55a">AOR_Y</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:abc5fd23c215e89a1d2b79d06a6fcd55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bbb660d801bfa8c5a326124a14eb27f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#a0bbb660d801bfa8c5a326124a14eb27f">AOR_LINES</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a0bbb660d801bfa8c5a326124a14eb27f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#a0bbb660d801bfa8c5a326124a14eb27f">AOR_LINES</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a0bbb660d801bfa8c5a326124a14eb27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a9883d2ae46c0e3c582c77e335344d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#a12a9883d2ae46c0e3c582c77e335344d">RS_X</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:a12a9883d2ae46c0e3c582c77e335344d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#a12a9883d2ae46c0e3c582c77e335344d">RS_X</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a12a9883d2ae46c0e3c582c77e335344d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a297bd4e2100b505d64efeb2d6f862357"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#a297bd4e2100b505d64efeb2d6f862357">RS_Y</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:a297bd4e2100b505d64efeb2d6f862357"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#a297bd4e2100b505d64efeb2d6f862357">RS_Y</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:a297bd4e2100b505d64efeb2d6f862357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abea6f451da7bec9d650f6a2045ac7c2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#abea6f451da7bec9d650f6a2045ac7c2c">RS_LINES</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:abea6f451da7bec9d650f6a2045ac7c2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#abea6f451da7bec9d650f6a2045ac7c2c">RS_LINES</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:abea6f451da7bec9d650f6a2045ac7c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa395a74be92f14d89071b7962193b9b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#aa395a74be92f14d89071b7962193b9b4">clear_angle_of_rotation_area</a> (void)</td></tr>
+<tr class="memitem:aa395a74be92f14d89071b7962193b9b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#aa395a74be92f14d89071b7962193b9b4">clear_angle_of_rotation_area</a> (void)</td></tr>
 <tr class="memdesc:aa395a74be92f14d89071b7962193b9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the area where the angle is written to.  <a href="#aa395a74be92f14d89071b7962193b9b4">More...</a><br /></td></tr>
 <tr class="separator:aa395a74be92f14d89071b7962193b9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23ce4816f7fd62778a8714f71fd22649"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#a23ce4816f7fd62778a8714f71fd22649">clear_rotation_speed_area</a> (void)</td></tr>
+<tr class="memitem:a23ce4816f7fd62778a8714f71fd22649"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#a23ce4816f7fd62778a8714f71fd22649">clear_rotation_speed_area</a> (void)</td></tr>
 <tr class="memdesc:a23ce4816f7fd62778a8714f71fd22649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the area where the speed is written to.  <a href="#a23ce4816f7fd62778a8714f71fd22649">More...</a><br /></td></tr>
 <tr class="separator:a23ce4816f7fd62778a8714f71fd22649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#ad842c0efa3d5cd83423b7a8da96c51a4">output_display_angle_of_rotation</a> (double angle)</td></tr>
+<tr class="memitem:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#ad842c0efa3d5cd83423b7a8da96c51a4">output_display_angle_of_rotation</a> (double angle)</td></tr>
 <tr class="memdesc:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the angle of rotation on the screen.  <a href="#ad842c0efa3d5cd83423b7a8da96c51a4">More...</a><br /></td></tr>
 <tr class="separator:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8c.html#a082fd6dcc46f96d1b49fe722d7a15f95">output_display_rotation_speed</a> (double speed)</td></tr>
+<tr class="memitem:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8c.html#a082fd6dcc46f96d1b49fe722d7a15f95">output_display_rotation_speed</a> (double speed)</td></tr>
 <tr class="memdesc:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the speed of rotation on the screen.  <a href="#a082fd6dcc46f96d1b49fe722d7a15f95">More...</a><br /></td></tr>
 <tr class="separator:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implmentation of the Output module. </p>
+<div class="textblock"><p>Implementation of the Output Display module. </p>
 <hr/>
 <dl class="section author"><dt>Author</dt><dd>Moritz Hoewer (<a href="#" onclick="location.href='mai'+'lto:'+'Mor'+'it'+'z.H'+'oe'+'wer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Morit<span style="display: none;">.nosp@m.</span>z.Ho<span style="display: none;">.nosp@m.</span>ewer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd>
 <dd>
@@ -331,7 +331,7 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="aufgabe2_2output_8c.html">output.c</a></li>
+    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="output__display_8c.html">output_display.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

@@ -10,8 +10,8 @@
 #include "main.h"
 #include "TI_Lib.h"
 #include "input.h"
+#include "output_display.h"
 #include "rpn.h"
-#include "output.h"
 #include "tokens.h"
 
 /** ****************************************************************

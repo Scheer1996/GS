@@ -1,13 +1,14 @@
 /** ****************************************************************
- * @file    aufgabe2/output.c
+ * @file    aufgabe2/output_display.c
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
  * @date    07.10.2016
- * @brief   Implmentation of the Output module
+ * @brief   Implementation of the Output Display module
  ******************************************************************
  */
-#include "output.h"
+#include "output_display.h"
+
 #include <string.h>
 #include <stdio.h>
 #include "tft.h"

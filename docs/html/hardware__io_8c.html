@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GSP - Entwicklerdokumentation: aufgabe2/io.c File Reference</title>
+<title>GSP - Entwicklerdokumentation: aufgabe2/hardware_io.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,7 +55,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('io_8c.html','');});
+$(document).ready(function(){initNavTree('hardware__io_8c.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
@@ -63,47 +63,48 @@ $(document).ready(function(){initNavTree('io_8c.html','');});
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">io.c File Reference</div>  </div>
+<div class="title">hardware_io.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the IO module.  
+<p>Implementation of the Hardware IO module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="io_8h_source.html">io.h</a>&quot;</code><br />
-<code>#include &quot;TI_Lib.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;TI_Lib.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="aufgabe2_2errors_8h_source.html">errors.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hardware__io_8h_source.html">hardware_io.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a4347a7874fd9296a9413b7ed9d7c53cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a4347a7874fd9296a9413b7ed9d7c53cc">MODER_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x03U &lt;&lt; (2* (i)));</td></tr>
+<tr class="memitem:a4347a7874fd9296a9413b7ed9d7c53cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a4347a7874fd9296a9413b7ed9d7c53cc">MODER_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x03U &lt;&lt; (2* (i)));</td></tr>
 <tr class="separator:a4347a7874fd9296a9413b7ed9d7c53cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70d236c4266709a66565d2cf57508f7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a70d236c4266709a66565d2cf57508f7e">OUTPUT_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x01U &lt;&lt; (2* (i)));</td></tr>
+<tr class="memitem:a70d236c4266709a66565d2cf57508f7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a70d236c4266709a66565d2cf57508f7e">OUTPUT_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x01U &lt;&lt; (2* (i)));</td></tr>
 <tr class="separator:a70d236c4266709a66565d2cf57508f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4572b59032f6a5ea0eadace66d660f27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a4572b59032f6a5ea0eadace66d660f27">BSRRH_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x01U &lt;&lt; (i));</td></tr>
+<tr class="memitem:a4572b59032f6a5ea0eadace66d660f27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a4572b59032f6a5ea0eadace66d660f27">BSRRH_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x01U &lt;&lt; (i));</td></tr>
 <tr class="separator:a4572b59032f6a5ea0eadace66d660f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73792c53cb191f3123c820c76353fe57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a73792c53cb191f3123c820c76353fe57">BSRRL_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x01U &lt;&lt; (i));</td></tr>
+<tr class="memitem:a73792c53cb191f3123c820c76353fe57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a73792c53cb191f3123c820c76353fe57">BSRRL_MASK_PIN_I</a>(i)&#160;&#160;&#160;(0x01U &lt;&lt; (i));</td></tr>
 <tr class="separator:a73792c53cb191f3123c820c76353fe57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76a1d5ba08cc4382342aabe2382a0f34"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a76a1d5ba08cc4382342aabe2382a0f34">NO_OF_PINS_OF_PORT</a>&#160;&#160;&#160;(16)</td></tr>
+<tr class="memitem:a76a1d5ba08cc4382342aabe2382a0f34"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a76a1d5ba08cc4382342aabe2382a0f34">NO_OF_PINS_OF_PORT</a>&#160;&#160;&#160;(16)</td></tr>
 <tr class="separator:a76a1d5ba08cc4382342aabe2382a0f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;GPIOE</td></tr>
 <tr class="separator:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a678e145156ef51e724f068efa1f270f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a678e145156ef51e724f068efa1f270f5">LED_D18</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memitem:a678e145156ef51e724f068efa1f270f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a678e145156ef51e724f068efa1f270f5">LED_D18</a>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:a678e145156ef51e724f068efa1f270f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab337dfe423dfe8a73737e951b4e0a93d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#ab337dfe423dfe8a73737e951b4e0a93d">LED_D19</a>&#160;&#160;&#160;6</td></tr>
+<tr class="memitem:ab337dfe423dfe8a73737e951b4e0a93d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#ab337dfe423dfe8a73737e951b4e0a93d">LED_D19</a>&#160;&#160;&#160;6</td></tr>
 <tr class="separator:ab337dfe423dfe8a73737e951b4e0a93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3e3a716dccfbea195a65c6039a16fd5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#ac3e3a716dccfbea195a65c6039a16fd5">LED_D20</a>&#160;&#160;&#160;7</td></tr>
+<tr class="memitem:ac3e3a716dccfbea195a65c6039a16fd5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#ac3e3a716dccfbea195a65c6039a16fd5">LED_D20</a>&#160;&#160;&#160;7</td></tr>
 <tr class="separator:ac3e3a716dccfbea195a65c6039a16fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af51e889689414a9bfc2c936c1987da0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#af51e889689414a9bfc2c936c1987da0a">configureOutput</a> (unsigned int pin)</td></tr>
+<tr class="memitem:af51e889689414a9bfc2c936c1987da0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#af51e889689414a9bfc2c936c1987da0a">configureOutput</a> (unsigned int pin)</td></tr>
 <tr class="separator:af51e889689414a9bfc2c936c1987da0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e403cb76df24ef77d02f2c4c7c5cde2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a1e403cb76df24ef77d02f2c4c7c5cde2">configureInput</a> (unsigned int pin)</td></tr>
+<tr class="memitem:a1e403cb76df24ef77d02f2c4c7c5cde2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a1e403cb76df24ef77d02f2c4c7c5cde2">configureInput</a> (unsigned int pin)</td></tr>
 <tr class="separator:a1e403cb76df24ef77d02f2c4c7c5cde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70149b4273a573699dbaec3ba0a832af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8c.html#a70149b4273a573699dbaec3ba0a832af">setPort</a> (unsigned int port, bool set_to_one)</td></tr>
-<tr class="separator:a70149b4273a573699dbaec3ba0a832af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a1c133e99fff150a5699c26353236cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8c.html#a4a1c133e99fff150a5699c26353236cd">setPort</a> (unsigned int port, bool set_to_one)</td></tr>
+<tr class="separator:a4a1c133e99fff150a5699c26353236cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the IO module. </p>
+<div class="textblock"><p>Implementation of the Hardware IO module. </p>
 <hr/>
 <dl class="section author"><dt>Author</dt><dd>Moritz Hoewer (<a href="#" onclick="location.href='mai'+'lto:'+'Mor'+'it'+'z.H'+'oe'+'wer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Morit<span style="display: none;">.nosp@m.</span>z.Ho<span style="display: none;">.nosp@m.</span>ewer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd>
 <dd>
@@ -290,14 +291,14 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 
 </div>
 </div>
-<a id="a70149b4273a573699dbaec3ba0a832af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70149b4273a573699dbaec3ba0a832af">&sect;&nbsp;</a></span>setPort()</h2>
+<a id="a4a1c133e99fff150a5699c26353236cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a1c133e99fff150a5699c26353236cd">&sect;&nbsp;</a></span>setPort()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void setPort </td>
+          <td class="memname">int setPort </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>port</em>, </td>
@@ -323,7 +324,7 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="io_8c.html">io.c</a></li>
+    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="hardware__io_8c.html">hardware_io.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
