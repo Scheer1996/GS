@@ -123,25 +123,33 @@ static int get_phase() {
 int encoder_update() {
     static int current_phase;
 
-    if (!valid_state) {
-        return E_INVALID_STATE;
-    }
-
+    // read inputs
     int next_phase = get_phase();
 
+    if (!valid_state) {
+        // remember current phase for next time
+        current_phase = next_phase;
+        
+        return E_INVALID_STATE;
+    }
+    
     if (current_phase == next_phase) {
         // stationary ==> do nothing
     } else if (((current_phase + 1) % 4) == next_phase) {
         //turned forwards one
         direction = FORWARD;
         position++;
-    } else if ((current_phase + 3) == next_phase) {
+    } else if (((current_phase + 3) % 4) == next_phase) {
         //turned backwards one
         direction = BACKWARD;
         position--;
     } else {
         // invalid (we skipped a step)
         valid_state = false;
+        
+        // remember current phase for next time
+        current_phase = next_phase;
+        
         return E_INVALID_STATE;
     }
 

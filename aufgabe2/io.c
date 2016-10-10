@@ -9,6 +9,7 @@
  */
 #include "io.h"
 #include "TI_Lib.h"
+#include "errors.h"
 
 // Bit masks for the GPIO Register
 #define MODER_MASK_PIN_I(i)     (0x03U << (2* (i)));
@@ -26,27 +27,23 @@
 #define LED_D20     7       //PORT 20 - PG7
 
 void configureOutput(unsigned int pin) {
-PORT->MODER = ((PORT->MODER & ~MODER_MASK_PIN_I(pin))
+    PORT->MODER = ((PORT->MODER & ~MODER_MASK_PIN_I(pin))
         | OUTPUT_MASK_PIN_I(pin));
 }
 
 void configureInput(unsigned int pin) {
-PORT->MODER = PORT->MODER & ~MODER_MASK_PIN_I(pin)
-;
+    PORT->MODER = PORT->MODER & ~MODER_MASK_PIN_I(pin);
 }
 
-void setPort(unsigned int port, bool set_to_one) {
-if (port >= NO_OF_PINS_OF_PORT) {
-    // error handling pending
-    // copied from Korf :D
-    return;
-}
+int setPort(unsigned int port, bool set_to_one) {
+    if (port >= NO_OF_PINS_OF_PORT) {
+        return E_INVALID_PIN;
+    }
 
-if (set_to_one) {
-    PORT->BSRRL = BSRRL_MASK_PIN_I(port)
-    ;
-} else {
-    PORT->BSRRH = BSRRH_MASK_PIN_I(port)
-    ;
-}
+    if (set_to_one) {
+        PORT->BSRRL = BSRRL_MASK_PIN_I(port);
+    } else {
+        PORT->BSRRH = BSRRH_MASK_PIN_I(port);
+    }
+    return 0;
 }
