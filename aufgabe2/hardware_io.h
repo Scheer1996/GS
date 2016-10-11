@@ -12,4 +12,9 @@
 
 #include <stdbool.h>
 
+/**
+ * @brief Initilizes the Hardware io
+ */
+void init_hardware_io();
+
 #endif /* HARDWARE_IO_H */

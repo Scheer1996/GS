@@ -12,11 +12,11 @@
 #include "hardware_io.h"
 
 // Bit masks for the GPIO Register
-#define MODER_MASK_PIN_I(i)     (0x03U << (2* (i)));
-#define OUTPUT_MASK_PIN_I(i)    (0x01U << (2* (i)));
+#define MODER_MASK_PIN_I(i)     (0x03U << (2* (i)))
+#define OUTPUT_MASK_PIN_I(i)    (0x01U << (2* (i)))
 
-#define BSRRH_MASK_PIN_I(i)     (0x01U << (i));
-#define BSRRL_MASK_PIN_I(i)     (0x01U << (i));
+#define BSRRH_MASK_PIN_I(i)     (0x01U << (i))
+#define BSRRL_MASK_PIN_I(i)     (0x01U << (i))
 
 #define NO_OF_PINS_OF_PORT      (16)
 
@@ -27,8 +27,7 @@
 #define LED_D20     7       //PORT 20 - PG7
 
 void configureOutput(unsigned int pin) {
-    PORT->MODER = ((PORT->MODER & ~MODER_MASK_PIN_I(pin))
-        | OUTPUT_MASK_PIN_I(pin));
+    PORT->MODER = (PORT->MODER & ~MODER_MASK_PIN_I(pin)) | (0xFFFFFFFF & OUTPUT_MASK_PIN_I(pin));
 }
 
 void configureInput(unsigned int pin) {
@@ -46,4 +45,10 @@ int setPort(unsigned int port, bool set_to_one) {
         PORT->BSRRH = BSRRH_MASK_PIN_I(port);
     }
     return 0;
+}
+
+void init_hardware_io(){
+    configureOutput(LED_D18);
+    configureOutput(LED_D19);
+    configureOutput(LED_D20);
 }
