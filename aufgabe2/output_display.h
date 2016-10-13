@@ -11,19 +11,12 @@
 #define OUTPUT_H
 
 /** ****************************************************************
- * @brief Displays the angle of rotation on the screen.
+ * @brief Displays the angle and speed of rotation on the screen.
  *
  * @param[in] angle the angle in degrees
- ******************************************************************
- */
-void output_display_angle_of_rotation(double angle);
-
-/** ****************************************************************
- * @brief Displays the speed of rotation on the screen.
- *
  * @param[in] speed the speed in degrees per second
  ******************************************************************
  */
-void output_display_rotation_speed(double speed);
+void output_display_data(double angle, double speed);
 
 #endif /* _OUTPUT_H */

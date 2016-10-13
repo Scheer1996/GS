@@ -13,65 +13,19 @@
 #include <stdio.h>
 #include "tft.h"
 
-#define MAX_LINE_LENGTH 35
+#define BUFFER_SIZE 40
 
-#define AOR_X 4
-#define AOR_Y 2
-#define AOR_LINES 1
-
-#define RS_X 4
-#define RS_Y 3
-#define RS_LINES 1
-
-static void clear_angle_of_rotation_area(void);
-static void clear_rotation_speed_area(void);
+#define OUT_X 2
+#define OUT_Y 2
 
 /* ****************************************************************
- * Displays the angle of rotation on the screen
+ * Displays the angle of rotation on the screen and the speed of roation on the screen
  ******************************************************************
  */
-void output_display_angle_of_rotation(double angle) {
-    clear_angle_of_rotation_area();
+void output_display_data(double angle, double speed) {
+    char buffer[BUFFER_SIZE + 1] = { 0 };
+    sprintf(buffer, "Winkel: %6.1f Grad bei %6.2f Grad/s", angle, speed);
 
-    char buffer[MAX_LINE_LENGTH + 1] = { 0 };
-    sprintf(buffer, "Angle of Rotation: %d Degree", angle);
-
-    TFT_set_window(FONT6x8, AOR_X, AOR_Y, MAX_LINE_LENGTH, AOR_LINES);
-    TFT_set_font_color(GREEN);
+    TFT_gotoxy(OUT_X, OUT_Y);
     TFT_puts(buffer);
-}
-
-/* ****************************************************************
- * Displays the speed of rotation on the screen
- ******************************************************************
- */
-void output_display_rotation_speed(double speed) {
-    clear_rotation_speed_area();
-
-    char buffer[MAX_LINE_LENGTH + 1] = { 0 };
-    sprintf(buffer, "Rotation Speed: %d Degrees per Second", speed);
-
-    TFT_set_window(FONT6x8, RS_X, RS_Y, MAX_LINE_LENGTH, RS_LINES);
-    TFT_set_font_color(GREEN);
-    TFT_puts(buffer);
-}
-
-/** ****************************************************************
- * @brief   Clears the area where the angle is written to
- ******************************************************************
- */
-static void clear_angle_of_rotation_area(void) {
-    TFT_set_window(FONT6x8, AOR_X, AOR_Y, MAX_LINE_LENGTH, AOR_LINES);
-    // TFT_cls is broken, so we print 35 spaces
-    TFT_puts("                                   ");
-}
-
-/** ****************************************************************
- * @brief   Clears the area where the speed is written to
- ******************************************************************
- */
-static void clear_rotation_speed_area(void) {
-    TFT_set_window(FONT6x8, RS_X, RS_Y, MAX_LINE_LENGTH, RS_LINES);
-    // TFT_cls is broken, so we print 35 spaces
-    TFT_puts("                                   ");
 }

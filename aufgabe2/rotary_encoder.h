@@ -8,6 +8,8 @@
  ******************************************************************
  */
 
+#ifndef ROTARY_ENCODER_H
+#define ROTARY_ENCODER_H
 /**
  * @brief Represents the possible directions of rotation for the encoder
  */
@@ -22,7 +24,7 @@ typedef enum {
  *
  * @return the direction
  */
-Direction encoder_get_direction();
+Direction encoder_get_direction(void);
 
 /**
  * @brief Returns the position in 0.1 degrees
@@ -32,17 +34,27 @@ Direction encoder_get_direction();
  *
  * @return position in 0.1 degrees
  */
-int encoder_get_position();
+int encoder_get_position(void);
+
+/**
+ * @brief Returns the position in pulses
+ *
+ * Position is relative to last reset, negative values indicate that the
+ * encoder turned backwards
+ *
+ * @return position in pulses
+ */
+int encoder_get_position_raw(void);
 
 /**
  * @brief Resets the encoder position
  */
-void encoder_reset();
+void encoder_reset(void);
 
 /**
  * @brief Initializes the encoder
  */
-void encoder_init();
+void encoder_init(void);
 
 /**
  * @brief Updates the encoder
@@ -55,4 +67,5 @@ void encoder_init();
  * @retval 0 no error
  * @retval E_INVALID_STATE the encoder has moved too much - state is now unknown
  */
-int encoder_update();
+int encoder_update(void);
+#endif /* ROTARY_ENCODER_H */

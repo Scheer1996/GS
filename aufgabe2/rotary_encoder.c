@@ -9,6 +9,7 @@
  */
 #include "rotary_encoder.h"
 #include "errors.h"
+#include "hardware_io.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -73,6 +74,14 @@ Direction encoder_get_direction() {
 }
 
 /* ******************************************************************
+ * Returns the position in pulses
+ * ******************************************************************
+ */
+int encoder_get_position_raw(){
+	return position;
+}
+
+/* ******************************************************************
  * Returns the position in 0.1 degrees
  * ******************************************************************
  */
@@ -86,13 +95,12 @@ int encoder_get_position() {
  * @return the phase
  */
 static int get_phase() {
-    int channel_a;
-    int channel_b;
+    bool channel_a;
+    bool channel_b;
 
-    // actual reading pending
-    printf("Enter values for channel A and B: ");
-    scanf("%d %d", &channel_a, &channel_b);
-    // actual reading pending
+    // read from hardware io
+	channel_a = hardware_io_get_encoder_channel_A();
+	channel_b = hardware_io_get_encoder_channel_B();
 
     int phase;
     if (channel_a) {
@@ -168,14 +176,4 @@ void encoder_init() {
     // update once to initialize static variable current_phase
     encoder_update();
     encoder_reset();
-}
-
-int main(void) {
-    encoder_init();
-
-    while(encoder_update() == 0){
-        printf("Position: %.1f degrees, Direction: %d\n\n", encoder_get_position() / 10.0, encoder_get_direction());
-    }
-
-    return 0;
 }
