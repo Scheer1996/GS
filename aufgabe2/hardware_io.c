@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    07.10.2016
+ * @date    14.10.2016
  * @brief   Implementation of the Hardware IO module
  ******************************************************************
  */
@@ -11,47 +11,38 @@
 #include "errors.h"
 #include "hardware_io.h"
 
-// Bit masks for the GPIO Register
-#define MODER_MASK_PIN(i)    (0x03U << (2*(i)))
-#define OUTPUT_MASK_PIN(i)   (0x01U << (2*(i)))
-
+/**
+ * Creates a mask for a pin, assuming 1 bit per pin.
+ */
 #define MASK_ONE_BIT_PIN(i)    (0x01U << (i))
 
-#define NO_OF_PINS_OF_PORT   (16)
+// Pin Configuration ----------------------------------------------------------
+/**
+ * the pin number where encoder channel A is connected to
+ */
+#define ENCODER_CHANNEL_A 0
 
-#define LED_D18     5       //PORT 18 - PG5
-#define LED_D19     6       //PORT 19 - PG6
-#define LED_D20     7       //PORT 20 - PG7
+/**
+ * the pin number where encoder channel B is connected to
+ */
+#define ENCODER_CHANNEL_B 1
 
-/*void configureOutput(unsigned int pin) {
-    PORT->MODER = (PORT->MODER & ~MODER_MASK_PIN_I(pin)) | (0xFFFFFFFF & OUTPUT_MASK_PIN_I(pin));
-}
+/**
+ * the pin number of the LED used to indicate an error
+ */
+#define ERROR_LED 5
 
-void configureInput(unsigned int pin) {
-    PORT->MODER = PORT->MODER & ~MODER_MASK_PIN_I(pin);
-}
+/**
+ * the pin number of the LED used to indicate forward turning
+ */
+#define FORWARD_LED 6
 
-int setPort(unsigned int port, bool set_to_one) {
-    if (port >= NO_OF_PINS_OF_PORT) {
-        return E_INVALID_PIN;
-    }
+/**
+ * the pin number of the LED used to indicate backward turning
+ */
+#define BACKWARD_LED 7
 
-    if (set_to_one) {
-        PORT->BSRRL = BSRRL_MASK_PIN_I(port);
-    } else {
-        PORT->BSRRH = BSRRH_MASK_PIN_I(port);
-    }
-    return 0;
-}
-
-
-void init_hardware_io(){
-    configureOutput(LED_D18);
-    configureOutput(LED_D19);
-    configureOutput(LED_D20);
-}
-*/
-
+// Functions ------------------------------------------------------------------
 /**
  * @brief Reads a single input from the board
  *
@@ -60,75 +51,70 @@ void init_hardware_io(){
  * 
  * @return whether the pin is high
  */
-bool is_pin_high(GPIO_TypeDef *port, int pin){
-	return (port->IDR & MASK_ONE_BIT_PIN(pin)) == MASK_ONE_BIT_PIN(pin);
+static bool is_pin_high(GPIO_TypeDef *port, int pin) {
+    return (port->IDR & MASK_ONE_BIT_PIN(pin)) == MASK_ONE_BIT_PIN(pin);
 }
-
 
 /* ******************************************************************
  * Reads channel A from encoder
  * ******************************************************************
  */
-bool hardware_io_get_encoder_channel_A(void){
-	return is_pin_high(GPIOE, 0);
+bool hwio_get_encoder_channel_A(void) {
+    return is_pin_high(GPIOE, ENCODER_CHANNEL_A);
 }
 
 /* ******************************************************************
  * Reads channel B from encoder
  * ******************************************************************
  */
-bool hardware_io_get_encoder_channel_B(void){
-	return is_pin_high(GPIOE, 1);
+bool hwio_get_encoder_channel_B(void) {
+    return is_pin_high(GPIOE, ENCODER_CHANNEL_B);
 }
 
 /* ******************************************************************
- * Displays an 8bit number on LEDS D21-D28
+ * Displays data on LEDs
  * ******************************************************************
  */
-void hardware_io_display_number(char number){
-	// a bit lazy...
-	GPIOG->ODR &= 0xFF;
-	GPIOG->ODR |= number << 8;
-}
+void hwio_display_data(char number, Direction dir) {
+    // create reset mask
+    int reset_mask = 0xFF00; // upper 8 bits get reset
+    reset_mask |= MASK_ONE_BIT_PIN(FORWARD_LED); // forward LED gets reset
+    reset_mask |= MASK_ONE_BIT_PIN(BACKWARD_LED); // backwards LED gets reset
 
-/* ******************************************************************
- * Displays the direction on LEDS D20 / D19
- * ******************************************************************
- */
-void hardware_io_display_direction(Direction dir){
-	int mask = 0;
-	if(dir == FORWARD){
-		mask = 1;
-	} else if(dir == BACKWARD){
-		mask = 2;
-	}
-	
-	GPIOG->ODR &= ~(3 << 6);
-	GPIOG->ODR |= (mask << 6);
+    // reset our pins to 0
+    GPIOG->BSRRH = reset_mask;
+
+    // display number on upper 8 bits
+    GPIOG->BSRRL = number << 8;
+
+    // display direction
+    if (dir == FORWARD) {
+        GPIOG->BSRRL = MASK_ONE_BIT_PIN(FORWARD_LED);
+    } else if (dir == BACKWARD) {
+        GPIOG->BSRRL = MASK_ONE_BIT_PIN(FORWARD_LED);
+    }
 }
 
 /* ******************************************************************
  * Checks reset switches S6 + S7
  * ******************************************************************
  */
-bool hardware_io_is_reset_pressed(void){
-	return !is_pin_high(GPIOE, 6) || !is_pin_high(GPIOE, 7);
+bool hwio_is_reset_pressed(void) {
+    return !is_pin_high(GPIOE, 6) || !is_pin_high(GPIOE, 7);
 }
-
 
 /* ******************************************************************
  * Displays an error by illuminating D18
  * ******************************************************************
  */
-void hardware_io_display_error(void){
-	GPIOG->BSRRL = MASK_ONE_BIT_PIN(5);
+void hwio_show_error(void) {
+    GPIOG->BSRRL = MASK_ONE_BIT_PIN(ERROR_LED);
 }
-
 
 /* ******************************************************************
  * Clears the error LED D18
  * ******************************************************************
  */
-void hardware_io_clear_error(void){
-	GPIOG->BSRRH = MASK_ONE_BIT_PIN(5);
+void hwio_clear_error(void) {
+    GPIOG->BSRRH = MASK_ONE_BIT_PIN(ERROR_LED);
 }

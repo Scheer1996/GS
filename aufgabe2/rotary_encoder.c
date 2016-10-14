@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    09.10.2016
+ * @date    14.10.2016
  * @brief   Implementation of the Rotary Encoder module
  ******************************************************************
  */
@@ -28,16 +28,6 @@
  * how many degrees in one revolution
  */
 #define DEGREES_PER_REVOLUTION 360
-
-/**
- * how to convert from degrees to 0.1 degrees (just added to avoid magic numbers)
- */
-#define DEGREES_TO_POINT_1_DEGREES 10
-
-/**
- * how many phases per cycle
- */
-#define PHASE_COUNT 4
 
 // Globals ***********************************************************
 /**
@@ -86,7 +76,8 @@ int encoder_get_position_raw(){
  * ******************************************************************
  */
 int encoder_get_position() {
-    return position * DEGREES_PER_REVOLUTION * DEGREES_TO_POINT_1_DEGREES / PPR;
+    // x10 for returning tenth of degrees
+    return position * DEGREES_PER_REVOLUTION * 10 / PPR;
 }
 
 /**
@@ -99,8 +90,8 @@ static int get_phase() {
     bool channel_b;
 
     // read from hardware io
-	channel_a = hardware_io_get_encoder_channel_A();
-	channel_b = hardware_io_get_encoder_channel_B();
+	channel_a = hwio_get_encoder_channel_A();
+	channel_b = hwio_get_encoder_channel_B();
 
     int phase;
     if (channel_a) {

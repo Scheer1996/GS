@@ -60,6 +60,7 @@ $(document).ready(function(){initNavTree('aufgabe2_2main_8c.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">main.c File Reference</div>  </div>
@@ -69,12 +70,24 @@ $(document).ready(function(){initNavTree('aufgabe2_2main_8c.html','');});
 <p>Main module and program entry point.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;main.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="aufgabe2_2errors_8h.html">errors.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="timer_8h.html">timer.h</a>&quot;</code><br />
 <code>#include &quot;TI_Lib.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="input_8h_source.html">input.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="output__display_8h_source.html">output_display.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="rpn_8h_source.html">rpn.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="tokens_8h_source.html">tokens.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hardware__io_8h.html">hardware_io.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="aufgabe2_2output_8h.html">output.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="rotary__encoder_8h.html">rotary_encoder.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a3ec94d356afa9569dfd3d05d260b8dee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2main_8c.html#a3ec94d356afa9569dfd3d05d260b8dee">SPEED_UPDATE_INTERVAL</a>&#160;&#160;&#160;40</td></tr>
+<tr class="separator:a3ec94d356afa9569dfd3d05d260b8dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a164e85377dad6c7ac07f2d452603f031"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2main_8c.html#a164e85377dad6c7ac07f2d452603f031">OSCI_HIGH</a>&#160;&#160;&#160;GPIOG-&gt;BSRRL = 1</td></tr>
+<tr class="memdesc:a164e85377dad6c7ac07f2d452603f031"><td class="mdescLeft">&#160;</td><td class="mdescRight">for debugging with oscilloscope  <a href="#a164e85377dad6c7ac07f2d452603f031">More...</a><br /></td></tr>
+<tr class="separator:a164e85377dad6c7ac07f2d452603f031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac73c79c0df8cef31d936cd6fb8e21ca0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2main_8c.html#ac73c79c0df8cef31d936cd6fb8e21ca0">OSCI_LOW</a>&#160;&#160;&#160;GPIOG-&gt;BSRRH = 1</td></tr>
+<tr class="memdesc:ac73c79c0df8cef31d936cd6fb8e21ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">for debugging with oscilloscope  <a href="#ac73c79c0df8cef31d936cd6fb8e21ca0">More...</a><br /></td></tr>
+<tr class="separator:ac73c79c0df8cef31d936cd6fb8e21ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
@@ -88,8 +101,58 @@ Functions</h2></td></tr>
 <dd>
 Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+'ch'+'eer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Phili<span style="display: none;">.nosp@m.</span>p.Sc<span style="display: none;">.nosp@m.</span>heer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>07.10.2016 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
+<dl class="section date"><dt>Date</dt><dd>14.10.2016 </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a164e85377dad6c7ac07f2d452603f031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a164e85377dad6c7ac07f2d452603f031">&sect;&nbsp;</a></span>OSCI_HIGH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OSCI_HIGH&#160;&#160;&#160;GPIOG-&gt;BSRRL = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>for debugging with oscilloscope </p>
+<p>could be put in Hardware IO module, but direct access is faster </p>
+
+</div>
+</div>
+<a id="ac73c79c0df8cef31d936cd6fb8e21ca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac73c79c0df8cef31d936cd6fb8e21ca0">&sect;&nbsp;</a></span>OSCI_LOW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OSCI_LOW&#160;&#160;&#160;GPIOG-&gt;BSRRH = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>for debugging with oscilloscope </p>
+<p>could be put in Hardware IO module, but direct access is faster </p>
+
+</div>
+</div>
+<a id="a3ec94d356afa9569dfd3d05d260b8dee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ec94d356afa9569dfd3d05d260b8dee">&sect;&nbsp;</a></span>SPEED_UPDATE_INTERVAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SPEED_UPDATE_INTERVAL&#160;&#160;&#160;40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>how often should speed be recalculated (in iterations of super loop) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a840291bc02cba5474a4cb46a9b9566fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&sect;&nbsp;</a></span>main()</h2>
 

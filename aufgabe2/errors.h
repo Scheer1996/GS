@@ -16,9 +16,4 @@
  */
 #define E_INVALID_STATE -1
 
-/**
- * the pin is invalid
- **/
-#define E_INVALID_PIN -2
-
 #endif /* ERRORS_H */

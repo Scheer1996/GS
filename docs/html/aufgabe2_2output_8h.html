@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GSP - Entwicklerdokumentation: aufgabe2/output_display.h File Reference</title>
+<title>GSP - Entwicklerdokumentation: aufgabe2/output.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,30 +55,28 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('output__display_8h.html','');});
+$(document).ready(function(){initNavTree('aufgabe2_2output_8h.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">output_display.h File Reference</div>  </div>
+<div class="title">output.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Header for the Output Display module.  
 <a href="#details">More...</a></p>
-
-<p><a href="output__display_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8h.html#ad842c0efa3d5cd83423b7a8da96c51a4">output_display_angle_of_rotation</a> (double angle)</td></tr>
-<tr class="memdesc:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the angle of rotation on the screen.  <a href="#ad842c0efa3d5cd83423b7a8da96c51a4">More...</a><br /></td></tr>
-<tr class="separator:ad842c0efa3d5cd83423b7a8da96c51a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output__display_8h.html#a082fd6dcc46f96d1b49fe722d7a15f95">output_display_rotation_speed</a> (double speed)</td></tr>
-<tr class="memdesc:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the speed of rotation on the screen.  <a href="#a082fd6dcc46f96d1b49fe722d7a15f95">More...</a><br /></td></tr>
-<tr class="separator:a082fd6dcc46f96d1b49fe722d7a15f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0b2322a646cd633eb3cda4e15d058ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8h.html#ac0b2322a646cd633eb3cda4e15d058ee">output_update_data</a> (double angle, double speed)</td></tr>
+<tr class="memdesc:ac0b2322a646cd633eb3cda4e15d058ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the angle and speed of rotation on the screen.  <a href="#ac0b2322a646cd633eb3cda4e15d058ee">More...</a><br /></td></tr>
+<tr class="separator:ac0b2322a646cd633eb3cda4e15d058ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aff2e47a9b5548cc175d2963113f105"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8h.html#a8aff2e47a9b5548cc175d2963113f105">output_init</a> ()</td></tr>
+<tr class="memdesc:a8aff2e47a9b5548cc175d2963113f105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the output (writing explanatory text)  <a href="#a8aff2e47a9b5548cc175d2963113f105">More...</a><br /></td></tr>
+<tr class="separator:a8aff2e47a9b5548cc175d2963113f105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header for the Output Display module. </p>
@@ -89,53 +87,55 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>07.10.2016 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad842c0efa3d5cd83423b7a8da96c51a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad842c0efa3d5cd83423b7a8da96c51a4">&sect;&nbsp;</a></span>output_display_angle_of_rotation()</h2>
+<a id="a8aff2e47a9b5548cc175d2963113f105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aff2e47a9b5548cc175d2963113f105">&sect;&nbsp;</a></span>output_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void output_display_angle_of_rotation </td>
+          <td class="memname">void output_init </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>angle</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Displays the angle of rotation on the screen. </p>
-<hr/>
- <dl class="params"><dt>Parameters</dt><dd>
+<p>Initializes the output (writing explanatory text) </p>
+
+</div>
+</div>
+<a id="ac0b2322a646cd633eb3cda4e15d058ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b2322a646cd633eb3cda4e15d058ee">&sect;&nbsp;</a></span>output_update_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void output_update_data </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>speed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the angle and speed of rotation on the screen. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>the angle in degrees </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a082fd6dcc46f96d1b49fe722d7a15f95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a082fd6dcc46f96d1b49fe722d7a15f95">&sect;&nbsp;</a></span>output_display_rotation_speed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void output_display_rotation_speed </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>speed</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Displays the speed of rotation on the screen. </p>
-<hr/>
- <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">speed</td><td>the speed in degrees per second </td></tr>
   </table>
   </dd>
@@ -148,7 +148,7 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="output__display_8h.html">output_display.h</a></li>
+    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="aufgabe2_2output_8h.html">output.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

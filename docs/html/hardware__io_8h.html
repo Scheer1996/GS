@@ -59,6 +59,8 @@ $(document).ready(function(){initNavTree('hardware__io_8h.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">hardware_io.h File Reference</div>  </div>
 </div><!--header-->
@@ -67,8 +69,29 @@ $(document).ready(function(){initNavTree('hardware__io_8h.html','');});
 <p>Header for the Hardware IO module.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
-</div>
-<p><a href="hardware__io_8h_source.html">Go to the source code of this file.</a></p>
+<code>#include &quot;<a class="el" href="rotary__encoder_8h.html">rotary_encoder.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ab5a77343ed27e10641a66960e92b2aa4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8h.html#ab5a77343ed27e10641a66960e92b2aa4">hwio_get_encoder_channel_A</a> (void)</td></tr>
+<tr class="memdesc:ab5a77343ed27e10641a66960e92b2aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads channel A from encoder.  <a href="#ab5a77343ed27e10641a66960e92b2aa4">More...</a><br /></td></tr>
+<tr class="separator:ab5a77343ed27e10641a66960e92b2aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0df1793db2ea783742244d7d62863a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8h.html#af0df1793db2ea783742244d7d62863a6">hwio_get_encoder_channel_B</a> (void)</td></tr>
+<tr class="memdesc:af0df1793db2ea783742244d7d62863a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads channel B from encoder.  <a href="#af0df1793db2ea783742244d7d62863a6">More...</a><br /></td></tr>
+<tr class="separator:af0df1793db2ea783742244d7d62863a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707ccefdb31a8637d18f001ebfcf50a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8h.html#a707ccefdb31a8637d18f001ebfcf50a9">hwio_display_data</a> (char number, <a class="el" href="rotary__encoder_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
+<tr class="memdesc:a707ccefdb31a8637d18f001ebfcf50a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays data on LEDs.  <a href="#a707ccefdb31a8637d18f001ebfcf50a9">More...</a><br /></td></tr>
+<tr class="separator:a707ccefdb31a8637d18f001ebfcf50a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98defddd559c7c5dc73e7a2301f57a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8h.html#ac98defddd559c7c5dc73e7a2301f57a3">hwio_show_error</a> (void)</td></tr>
+<tr class="memdesc:ac98defddd559c7c5dc73e7a2301f57a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays an error by illuminating D18.  <a href="#ac98defddd559c7c5dc73e7a2301f57a3">More...</a><br /></td></tr>
+<tr class="separator:ac98defddd559c7c5dc73e7a2301f57a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ee822ca52ddae9b7327a74404b1ecb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8h.html#a0ee822ca52ddae9b7327a74404b1ecb3">hwio_clear_error</a> (void)</td></tr>
+<tr class="memdesc:a0ee822ca52ddae9b7327a74404b1ecb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the error LED D18.  <a href="#a0ee822ca52ddae9b7327a74404b1ecb3">More...</a><br /></td></tr>
+<tr class="separator:a0ee822ca52ddae9b7327a74404b1ecb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ebbf4644023f725d4b482952f9a816"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware__io_8h.html#a76ebbf4644023f725d4b482952f9a816">hwio_is_reset_pressed</a> (void)</td></tr>
+<tr class="memdesc:a76ebbf4644023f725d4b482952f9a816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks reset switches S7 and S6.  <a href="#a76ebbf4644023f725d4b482952f9a816">More...</a><br /></td></tr>
+<tr class="separator:a76ebbf4644023f725d4b482952f9a816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header for the Hardware IO module. </p>
 <hr/>
@@ -76,8 +99,161 @@ $(document).ready(function(){initNavTree('hardware__io_8h.html','');});
 <dd>
 Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+'ch'+'eer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Phili<span style="display: none;">.nosp@m.</span>p.Sc<span style="display: none;">.nosp@m.</span>heer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>07.10.2016 </dd></dl>
-</div></div><!-- contents -->
+<dl class="section date"><dt>Date</dt><dd>14.10.2016 </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a0ee822ca52ddae9b7327a74404b1ecb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ee822ca52ddae9b7327a74404b1ecb3">&sect;&nbsp;</a></span>hwio_clear_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hwio_clear_error </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the error LED D18. </p>
+
+</div>
+</div>
+<a id="a707ccefdb31a8637d18f001ebfcf50a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707ccefdb31a8637d18f001ebfcf50a9">&sect;&nbsp;</a></span>hwio_display_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hwio_display_data </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="rotary__encoder_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays data on LEDs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">number</td><td>an 8 bit number to be displayed on LEDS D21-D28 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dir</td><td>displays the direction on LEDS D20 / D19 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab5a77343ed27e10641a66960e92b2aa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5a77343ed27e10641a66960e92b2aa4">&sect;&nbsp;</a></span>hwio_get_encoder_channel_A()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hwio_get_encoder_channel_A </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads channel A from encoder. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>channel is high </td></tr>
+    <tr><td class="paramname">false</td><td>channel is low </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af0df1793db2ea783742244d7d62863a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0df1793db2ea783742244d7d62863a6">&sect;&nbsp;</a></span>hwio_get_encoder_channel_B()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hwio_get_encoder_channel_B </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads channel B from encoder. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>channel is high </td></tr>
+    <tr><td class="paramname">false</td><td>channel is low </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a76ebbf4644023f725d4b482952f9a816"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ebbf4644023f725d4b482952f9a816">&sect;&nbsp;</a></span>hwio_is_reset_pressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hwio_is_reset_pressed </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks reset switches S7 and S6. </p>
+<dl class="section return"><dt>Returns</dt><dd>true when either is pressed </dd></dl>
+
+</div>
+</div>
+<a id="ac98defddd559c7c5dc73e7a2301f57a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98defddd559c7c5dc73e7a2301f57a3">&sect;&nbsp;</a></span>hwio_show_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hwio_show_error </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays an error by illuminating D18. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

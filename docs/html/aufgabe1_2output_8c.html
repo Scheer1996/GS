@@ -55,7 +55,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('output_8c.html','');});
+$(document).ready(function(){initNavTree('aufgabe1_2output_8c.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
@@ -69,62 +69,62 @@ $(document).ready(function(){initNavTree('output_8c.html','');});
 
 <p>Implementation of the Output module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="stack_8h_source.html">stack.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="output_8h_source.html">output.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="stack_8h.html">stack.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="aufgabe1_2output_8h.html">output.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;tft.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:af0f2173e3b202ddf5756531b4471dcb2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a>&#160;&#160;&#160;35</td></tr>
+<tr class="memitem:af0f2173e3b202ddf5756531b4471dcb2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a>&#160;&#160;&#160;35</td></tr>
 <tr class="separator:af0f2173e3b202ddf5756531b4471dcb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;20</td></tr>
+<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;20</td></tr>
 <tr class="separator:a6b20d41d6252e9871430c242cb1a56e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68d53e0284a38baa1aaedfbbdf797f13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a68d53e0284a38baa1aaedfbbdf797f13">SEPERATOR</a>&#160;&#160;&#160;&quot; | &quot;</td></tr>
+<tr class="memitem:a68d53e0284a38baa1aaedfbbdf797f13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a68d53e0284a38baa1aaedfbbdf797f13">SEPERATOR</a>&#160;&#160;&#160;&quot; | &quot;</td></tr>
 <tr class="separator:a68d53e0284a38baa1aaedfbbdf797f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aa632b7f2430df74a98b025fa3baf19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a6aa632b7f2430df74a98b025fa3baf19">SEPERATOR_LENGTH</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:a6aa632b7f2430df74a98b025fa3baf19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a6aa632b7f2430df74a98b025fa3baf19">SEPERATOR_LENGTH</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:a6aa632b7f2430df74a98b025fa3baf19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27eb1d80568bffd1064207239d8665b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a27eb1d80568bffd1064207239d8665b1">STACK_X</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:a27eb1d80568bffd1064207239d8665b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a27eb1d80568bffd1064207239d8665b1">STACK_X</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a27eb1d80568bffd1064207239d8665b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a782a91be567ea27fe777951be1284099"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a782a91be567ea27fe777951be1284099">STACK_Y</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a782a91be567ea27fe777951be1284099"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a782a91be567ea27fe777951be1284099">STACK_Y</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a782a91be567ea27fe777951be1284099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26f45afcb28be8cb7a0d4212e6b4bf7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a26f45afcb28be8cb7a0d4212e6b4bf7f">STACK_LINES</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a26f45afcb28be8cb7a0d4212e6b4bf7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a26f45afcb28be8cb7a0d4212e6b4bf7f">STACK_LINES</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a26f45afcb28be8cb7a0d4212e6b4bf7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b302f7e9674dc7d285d14a2feecce08"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a6b302f7e9674dc7d285d14a2feecce08">ERROR_X</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:a6b302f7e9674dc7d285d14a2feecce08"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a6b302f7e9674dc7d285d14a2feecce08">ERROR_X</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a6b302f7e9674dc7d285d14a2feecce08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad28e13c429a0713e4ccb27a5002c9664"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#ad28e13c429a0713e4ccb27a5002c9664">ERROR_Y</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:ad28e13c429a0713e4ccb27a5002c9664"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#ad28e13c429a0713e4ccb27a5002c9664">ERROR_Y</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:ad28e13c429a0713e4ccb27a5002c9664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab280efd2b54cf422b1fa41a33b52385b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#ab280efd2b54cf422b1fa41a33b52385b">ERROR_LINES</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:ab280efd2b54cf422b1fa41a33b52385b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#ab280efd2b54cf422b1fa41a33b52385b">ERROR_LINES</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ab280efd2b54cf422b1fa41a33b52385b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac945e68a8644eaf647a7337d0b99d69a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#ac945e68a8644eaf647a7337d0b99d69a">NUMBER_X</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:ac945e68a8644eaf647a7337d0b99d69a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#ac945e68a8644eaf647a7337d0b99d69a">NUMBER_X</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:ac945e68a8644eaf647a7337d0b99d69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af77e6319bf753f43e6206e563d7a7587"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#af77e6319bf753f43e6206e563d7a7587">NUMBER_Y</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:af77e6319bf753f43e6206e563d7a7587"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#af77e6319bf753f43e6206e563d7a7587">NUMBER_Y</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:af77e6319bf753f43e6206e563d7a7587"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e47e066a45cd049927dc12fb87b271c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a4e47e066a45cd049927dc12fb87b271c">NUMBER_LINES</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a4e47e066a45cd049927dc12fb87b271c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a4e47e066a45cd049927dc12fb87b271c">NUMBER_LINES</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a4e47e066a45cd049927dc12fb87b271c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aed279226e6e97f04e9a42a9c0fcaf9a1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#aed279226e6e97f04e9a42a9c0fcaf9a1">clear_stack_area</a> (void)</td></tr>
+<tr class="memitem:aed279226e6e97f04e9a42a9c0fcaf9a1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#aed279226e6e97f04e9a42a9c0fcaf9a1">clear_stack_area</a> (void)</td></tr>
 <tr class="memdesc:aed279226e6e97f04e9a42a9c0fcaf9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the screen space where the stack is written to.  <a href="#aed279226e6e97f04e9a42a9c0fcaf9a1">More...</a><br /></td></tr>
 <tr class="separator:aed279226e6e97f04e9a42a9c0fcaf9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe7e4abf0abd66f2153d491328cf96f4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#afe7e4abf0abd66f2153d491328cf96f4">clear_number_area</a> (void)</td></tr>
+<tr class="memitem:afe7e4abf0abd66f2153d491328cf96f4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#afe7e4abf0abd66f2153d491328cf96f4">clear_number_area</a> (void)</td></tr>
 <tr class="memdesc:afe7e4abf0abd66f2153d491328cf96f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the screen space where numbers are written to.  <a href="#afe7e4abf0abd66f2153d491328cf96f4">More...</a><br /></td></tr>
 <tr class="separator:afe7e4abf0abd66f2153d491328cf96f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a617c9885d72be25a7a35302526c400d6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a617c9885d72be25a7a35302526c400d6">generateStackLine</a> (char *output, int sizeRemaining)</td></tr>
+<tr class="memitem:a617c9885d72be25a7a35302526c400d6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a617c9885d72be25a7a35302526c400d6">generateStackLine</a> (char *output, int sizeRemaining)</td></tr>
 <tr class="memdesc:a617c9885d72be25a7a35302526c400d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <code>char</code>[] from the stack.  <a href="#a617c9885d72be25a7a35302526c400d6">More...</a><br /></td></tr>
 <tr class="separator:a617c9885d72be25a7a35302526c400d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2261e94c23cbee3414631a65dedd9793"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a2261e94c23cbee3414631a65dedd9793">output_display_stack</a> (void)</td></tr>
+<tr class="memitem:a2261e94c23cbee3414631a65dedd9793"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a2261e94c23cbee3414631a65dedd9793">output_display_stack</a> (void)</td></tr>
 <tr class="memdesc:a2261e94c23cbee3414631a65dedd9793"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the stack on screen.  <a href="#a2261e94c23cbee3414631a65dedd9793">More...</a><br /></td></tr>
 <tr class="separator:a2261e94c23cbee3414631a65dedd9793"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa1b4764f7b09b96264642bbf21ab968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#aaa1b4764f7b09b96264642bbf21ab968">output_display_number</a> (int number)</td></tr>
+<tr class="memitem:aaa1b4764f7b09b96264642bbf21ab968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#aaa1b4764f7b09b96264642bbf21ab968">output_display_number</a> (int number)</td></tr>
 <tr class="memdesc:aaa1b4764f7b09b96264642bbf21ab968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays a number on the screen.  <a href="#aaa1b4764f7b09b96264642bbf21ab968">More...</a><br /></td></tr>
 <tr class="separator:aaa1b4764f7b09b96264642bbf21ab968"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c51a47fcaeb36ca51ff49dba36b741e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#a8c51a47fcaeb36ca51ff49dba36b741e">output_display_error</a> (char *message)</td></tr>
+<tr class="memitem:a8c51a47fcaeb36ca51ff49dba36b741e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#a8c51a47fcaeb36ca51ff49dba36b741e">output_display_error</a> (char *message)</td></tr>
 <tr class="memdesc:a8c51a47fcaeb36ca51ff49dba36b741e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays an error message on the screen.  <a href="#a8c51a47fcaeb36ca51ff49dba36b741e">More...</a><br /></td></tr>
 <tr class="separator:a8c51a47fcaeb36ca51ff49dba36b741e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedfa4df58e2d9aa1b6c610b7f2d14009"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="output_8c.html#aedfa4df58e2d9aa1b6c610b7f2d14009">output_clear_error</a> (void)</td></tr>
+<tr class="memitem:aedfa4df58e2d9aa1b6c610b7f2d14009"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe1_2output_8c.html#aedfa4df58e2d9aa1b6c610b7f2d14009">output_clear_error</a> (void)</td></tr>
 <tr class="memdesc:aedfa4df58e2d9aa1b6c610b7f2d14009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the error message.  <a href="#aedfa4df58e2d9aa1b6c610b7f2d14009">More...</a><br /></td></tr>
 <tr class="separator:aedfa4df58e2d9aa1b6c610b7f2d14009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -529,7 +529,7 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8913d2aeb0e48690eb2526f9127f2171.html">aufgabe1</a></li><li class="navelem"><a class="el" href="output_8c.html">output.c</a></li>
+    <li class="navelem"><a class="el" href="dir_8913d2aeb0e48690eb2526f9127f2171.html">aufgabe1</a></li><li class="navelem"><a class="el" href="aufgabe1_2output_8c.html">output.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
