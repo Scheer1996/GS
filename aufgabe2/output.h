@@ -21,6 +21,6 @@ void output_update_data(double angle, double speed);
 /**
  * @brief Initializes the output (writing explanatory text)
  */
-void output_init();
+void output_init(void);
 
 #endif /* _OUTPUT_H */

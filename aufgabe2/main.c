@@ -99,8 +99,7 @@ int main(void) {
             }
 
             // display on LEDs
-            hwio_display_data((char) pulses);
-            hardware_io_display_direction(encoder_get_direction());
+            hwio_display_data((char) pulses, encoder_get_direction());
 
             // display on display
             OSCI_HIGH;

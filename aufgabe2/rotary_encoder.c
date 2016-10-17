@@ -17,7 +17,7 @@
 /**
  * how many cycles per revolution
  */
-#define CPR 360
+#define CPR 300
 
 /**
  * how many pulses per revolution (always 4x CPR)
