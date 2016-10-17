@@ -91,7 +91,7 @@ void hwio_display_data(char number, Direction dir) {
     if (dir == FORWARD) {
         GPIOG->BSRRL = MASK_ONE_BIT_PIN(FORWARD_LED);
     } else if (dir == BACKWARD) {
-        GPIOG->BSRRL = MASK_ONE_BIT_PIN(FORWARD_LED);
+        GPIOG->BSRRL = MASK_ONE_BIT_PIN(BACKWARD_LED);
     }
 }
 
