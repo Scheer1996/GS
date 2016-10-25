@@ -16,5 +16,15 @@
  */
 #define E_FAILED_TO_READ -1
 
+/**
+ * illegal VLA access
+ */
+#define E_INDEX_OUT_OF_BOUNDS -2
+
+/**
+ * bad bitmap
+ */
+#define E_BAD_BITMAP -3
+
 
 #endif /* AUFGABE3_ERRORS_H_ */

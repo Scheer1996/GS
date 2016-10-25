@@ -40,24 +40,6 @@ typedef struct __attribute__((__packed__)){
     DWORD biClrImportant;
 } BitmapInfoHeader;
 
-/**
- * @brief Wraps the pointer to the memory containing the pixel data and array size
- */
-typedef struct {
-    int width;
-    int height;
-    void* data;
-}ImageData;
-
-/**
- * @brief Representation of a Bitmap
- */
-typedef struct {
-    BitmapFileHeader fileHeader;
-    BitmapInfoHeader infoHeader;
-    ImageData imageData;
-
-} Bitmap;
 
 /**
  * @brief The data (RGB values) of a single pixel
@@ -69,7 +51,26 @@ typedef struct {
 } PixelData;
 
 /**
- * @brief The data in the pallete
+ * @brief Wraps the pointer to the memory containing data and array size
+ */
+typedef struct {
+    int width;
+    int height;
+    PixelData* data;
+}VLA;
+
+/**
+ * @brief Representation of a Bitmap
+ */
+typedef struct {
+    BitmapFileHeader fileHeader;
+    BitmapInfoHeader infoHeader;
+    VLA imageData;
+
+} Bitmap;
+
+/**
+ * @brief The data in the color table
  */
 typedef struct __attribute__((__packed__)){
  unsigned char blue;
