@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    24.10.2016
+ * @date    26.10.2016
  * @brief   Implementation for the Input module
  ******************************************************************
  */
@@ -14,14 +14,20 @@
 #include "my_vla.h"
 #include <stdbool.h>
 
+/**
+ * the size of the color table in the bitmap
+ */
 #define COLOR_TABLE_SIZE 256
 
 /**
+ * reads the bitmap headers from a file
  *
- * @param file
- * @param fileHeader
- * @param infoHeader
- * @return
+ * @param[in]  file       the file to read from
+ * @param[out] fileHeader pointer to where the file header should be stored
+ * @param[out] infoHeader pointer to where the info header should be stored
+ * @return error code
+ * @retval 0                no error
+ * @retval E_FAILED_TO_READ there was an error reading from the file
  */
 static int read_headers(FILE* file, BitmapFileHeader *fileHeader,
         BitmapInfoHeader *infoHeader) {
@@ -42,9 +48,11 @@ static int read_headers(FILE* file, BitmapFileHeader *fileHeader,
     return 0;
 }
 /**
+ * reads the color table from a file
  *
- * @param file
- * @return
+ * @param[in] file the file to read from
+ * @return pointer to where the color table is stored on the heap
+ * @retval NULL there was an error
  */
 static ColorTableEntry* read_color_table(FILE* file) {
     size_t readSize;
@@ -55,8 +63,10 @@ static ColorTableEntry* read_color_table(FILE* file) {
         return NULL;
     }
 
-    readSize = fread(colorTable, sizeof(ColorTableEntry), 256, file);
-    if (readSize != 256) {
+    // read table
+    readSize = fread(colorTable, sizeof(ColorTableEntry), COLOR_TABLE_SIZE,
+            file);
+    if (readSize != COLOR_TABLE_SIZE) {
         free(colorTable);
         return NULL;
     }
@@ -64,10 +74,17 @@ static ColorTableEntry* read_color_table(FILE* file) {
 }
 
 /**
+ * reads pixel data from a file, assuming 24bit per pixel
  *
- * @param file
- * @param image_data
- * @return
+ * @param[in]      file       the file to read from
+ * @param[in, out] image_data pointer to a structure containing width and
+ *                            height of the image. Will contain pointer to
+ *                            where pixel data is stored on the heap when done
+ * @return error code
+ * @retval 0                     no error
+ * @retval E_FAILED_TO_READ      there was an error reading from the file
+ * @retval E_NO_MEMORY           couldn't allocate sufficient memory
+ * @retval E_INDEX_OUT_OF_BOUNDS tried to write to invalid indices in VLA
  */
 static int read_pixels_24bit(FILE* file, VLA* image_data) {
     size_t readSize;
@@ -77,14 +94,14 @@ static int read_pixels_24bit(FILE* file, VLA* image_data) {
     PixelData *data = (PixelData*) calloc(
             image_data->width * image_data->height, sizeof(PixelData));
     if (data == NULL) {
-        return E_FAILED_TO_READ;
+        return E_NO_MEMORY;
     }
 
     image_data->data = data;
 
     // Read image
-    for (int i = 0; i < image_data->width; i++) {
-        for (int j = 0; j < image_data->height; j++) {
+    for (int y = image_data->height - 1; y >= 0; y--) {
+        for (int x = 0; x < image_data->width; x++) {
             readSize = fread(&pData, sizeof(pData), 1, file);
             if (readSize != 1) {
                 free(data);
@@ -92,7 +109,7 @@ static int read_pixels_24bit(FILE* file, VLA* image_data) {
             }
 
             // write to VLA
-            if (vla_set(i, j, image_data, pData) != 0) {
+            if (vla_set(x, y, image_data, pData) != 0) {
                 free(data);
                 return E_INDEX_OUT_OF_BOUNDS;
             }
@@ -103,11 +120,18 @@ static int read_pixels_24bit(FILE* file, VLA* image_data) {
 }
 
 /**
+ * reads pixel data from a file, assuming 8bit per pixel
  *
- * @param file
- * @param color_table
- * @param image_data
- * @return
+ * @param[in]      file        the file to read from
+ * @param[in]      color_table the color table for converting from color index to actual color
+ * @param[in, out] image_data  pointer to a structure containing width and
+ *                             height of the image. Will contain pointer to
+ *                             where pixel data is stored on the heap when done
+ * @return error code
+ * @retval 0                     no error
+ * @retval E_FAILED_TO_READ      there was an error reading from the file
+ * @retval E_NO_MEMORY           couldn't allocate sufficient memory
+ * @retval E_INDEX_OUT_OF_BOUNDS tried to write to invalid indices in VLA
  */
 static int read_pixels_8bit(FILE* file, ColorTableEntry* color_table,
         VLA* image_data) {
@@ -118,14 +142,14 @@ static int read_pixels_8bit(FILE* file, ColorTableEntry* color_table,
     PixelData *data = (PixelData*) calloc(
             image_data->width * image_data->height, sizeof(PixelData));
     if (data == NULL) {
-        return E_FAILED_TO_READ;
+        return E_NO_MEMORY;
     }
 
     image_data->data = data;
 
     // Read image
-    for (int i = 0; i < image_data->width; i++) {
-        for (int j = 0; j < image_data->height; j++) {
+    for (int y = image_data->height - 1; y >= 0; y--) {
+        for (int x = 0; x < image_data->width; x++) {
             readSize = fread(&index, sizeof(index), 1, file);
             if (readSize != 1) {
                 free(data);
@@ -135,7 +159,7 @@ static int read_pixels_8bit(FILE* file, ColorTableEntry* color_table,
             ColorTableEntry c = color_table[index];
             PixelData p = { c.blue, c.green, c.red };
 
-            if (vla_set(i, j, image_data, p) != 0) {
+            if (vla_set(x, y, image_data, p) != 0) {
                 free(data);
                 return E_INDEX_OUT_OF_BOUNDS;
             }
@@ -146,11 +170,14 @@ static int read_pixels_8bit(FILE* file, ColorTableEntry* color_table,
 }
 
 /**
+ * reads two bytes from a file
  *
- * @param b1
- * @param b2
- * @param file
- * @return
+ * @param[out] b1   pointer to the first byte to read
+ * @param[out] b2   pointer to the second byte to read
+ * @param[in]  file the file to read from
+ * @return error code
+ * @retval 0                no error
+ * @retval E_FAILED_TO_READ there was an error reading from the file
  */
 static int read_two_bytes(unsigned char *b1, unsigned char *b2, FILE* file) {
     size_t readSize;
@@ -167,11 +194,18 @@ static int read_two_bytes(unsigned char *b1, unsigned char *b2, FILE* file) {
 }
 
 /**
+ * reads pixel data from a file, assuming 8 bit per pixel compressed with RLE encoding
  *
- * @param file
- * @param color_table
- * @param image_data
- * @return
+ * @param[in]      file        the file to read from
+ * @param[in]      color_table the color table for converting from color index to actual color
+ * @param[in, out] image_data  pointer to a structure containing width and
+ *                             height of the image. Will contain pointer to
+ *                             where pixel data is stored on the heap when done
+ * @return error code
+ * @retval 0                     no error
+ * @retval E_FAILED_TO_READ      there was an error reading from the file
+ * @retval E_NO_MEMORY           couldn't allocate sufficient memory
+ * @retval E_INDEX_OUT_OF_BOUNDS tried to write to invalid indices in VLA
  */
 static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
         VLA* image_data) {
@@ -180,21 +214,21 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
     PixelData *data = (PixelData*) calloc(
             image_data->width * image_data->height, sizeof(PixelData));
     if (data == NULL) {
-        return E_FAILED_TO_READ;
+        return E_NO_MEMORY;
     }
 
     image_data->data = data;
 
-    // two bytes
     unsigned char b1, b2;
-
     bool was_absolute = false;
     int current_x = 0;
-    int current_y = 0;
+    int current_y = image_data->height - 1; // image is stored "upside down"
     size_t readSize;
 
     while (1) {
         if (was_absolute) {
+            // we just finished an absolute mode
+            // if next byte is 00 or 01, we need to count them as controls
             was_absolute = false;
 
             readSize = fread(&b1, sizeof(b1), 1, file);
@@ -206,9 +240,9 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
             if (b1 == 0) {
                 // EOL
                 current_x = 0;
-                current_y++;
+                current_y--;
 
-                // Read two bytes from Image
+                // Read next two bytes from Image as usual
                 if (read_two_bytes(&b1, &b2, file)) {
                     free(data);
                     return E_FAILED_TO_READ;
@@ -217,6 +251,8 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
                 // EOF
                 break;
             } else {
+                // ok, it wasn't a control sequence ==> read 2nd byte and
+                // pretend nothing special happened
                 readSize = fread(&b2, sizeof(b2), 1, file);
                 if (readSize != 1) {
                     free(data);
@@ -235,7 +271,7 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
             // control sequence
             if (b2 == 0) {
                 // EOL
-                current_y++;
+                current_y--;
                 current_x = 0;
             } else if (b2 == 1) {
                 // EOF
@@ -252,7 +288,7 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
                     return E_FAILED_TO_READ;
                 }
                 current_x += b1;
-                current_y -= b2;
+                current_y += b2;
 
             } else {
                 // absolute mode
@@ -260,16 +296,19 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
 
                 //b2 has number of pixels in absolute mode
                 for (int i = 0; i < b2; i++) {
+
+                    // read next byte
                     readSize = fread(&b1, sizeof(b1), 1, file);
                     if (readSize != 1) {
                         free(data);
                         return E_FAILED_TO_READ;
                     }
+
                     // get color and write it to VLA
                     ColorTableEntry c = color_table[b1];
                     PixelData p = { c.blue, c.green, c.red };
 
-                    if (vla_set(current_y, current_x, image_data, p) != 0) {
+                    if (vla_set(current_x, current_y, image_data, p) != 0) {
                         free(data);
                         return E_INDEX_OUT_OF_BOUNDS;
                     }
@@ -278,21 +317,22 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
                     current_x++;
                 }
 
-                // read next pixel
+                // read next byte (will be 00, end of absolute mode)
                 readSize = fread(&b1, sizeof(b1), 1, file);
                 if (readSize != 1) {
                     free(data);
                     return E_FAILED_TO_READ;
                 }
             }
-        } else {
+        } else { /* if(b1 == 0) */
+            // normal RLE mode
             // b1 ist amount, b2 is color index
             ColorTableEntry c = color_table[b2];
             PixelData p = { c.blue, c.green, c.red };
 
             for (int i = 0; i < b1; i++) {
                 // write pixel b1 times
-                if (vla_set(current_y, current_x, image_data, p) != 0) {
+                if (vla_set(current_x, current_y, image_data, p) != 0) {
                     free(data);
                     return E_INDEX_OUT_OF_BOUNDS;
                 }
@@ -304,42 +344,58 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
 
     return 0;
 }
-
+/**
+ * checks header fields for validity
+ *
+ * @param[in] fileHeader the bitmap file header
+ * @param[in] infoHeader the buitmap info header
+ * @retval true  bitmap is valid
+ * @retval false bitmap is invalid
+ */
 static bool is_valid(BitmapFileHeader *fileHeader, BitmapInfoHeader *infoHeader) {
     // check file header
+    // type must be BM (ASCII)
     if (fileHeader->bfType != 0x4d42) {
         return false;
     }
 
+    // reserved must be 0
     if (fileHeader->bfReserved1 != 0 || fileHeader->bfReserved2 != 0) {
         return false;
     }
 
     // check info header
+    // info header size must be 40
     if (infoHeader->biSize != 40) {
         return false;
     }
 
+    // images width and height must be positive
     if (infoHeader->biWidth < 0 || infoHeader->biHeight < 0) {
         return false;
     }
 
+    // planes must be one
     if (infoHeader->biPlanes != 1) {
         return false;
     }
 
+    // bit count must be 8 or 24
     if (infoHeader->biBitCount != 8 && infoHeader->biBitCount != 24) {
         return false;
     }
 
+    // compression must be 0 or 1
     if (infoHeader->biCompression != 1 && infoHeader->biCompression != 0) {
         return false;
     }
 
-    if (infoHeader->biClrUsed != 0 && infoHeader->biClrImportant != 0) {
+    // color used and color important must be 0
+    if (infoHeader->biClrUsed != 0 || infoHeader->biClrImportant != 0) {
         return false;
     }
 
+    // still with me? well seems like everything is good then
     return true;
 }
 
@@ -376,10 +432,12 @@ int input_read_file(char* path, Bitmap* bitmap) {
     bitmap->infoHeader = infoHeader;
     // DEBUG CODE!!!
 
+    // create structure for image data
     VLA image_data;
     image_data.width = infoHeader.biWidth;
     image_data.height = infoHeader.biHeight;
 
+    // check type for choosing the correct read() method
     if (infoHeader.biBitCount == 8) {
         // 256 color Bitmap (8 bit)
 
@@ -398,20 +456,25 @@ int input_read_file(char* path, Bitmap* bitmap) {
             // Bitmap is compressed
             res = read_pixels_8bit_rle(bmpFile, color_table, &image_data);
         }
+
+        // we no longer need the color table, so free it before we forget
         free(color_table);
+
+        // check whether reading worked
         if (res != 0) {
             fclose(bmpFile);
-            return E_FAILED_TO_READ;
+            return res;
         }
     } else {
         // 24 bit bitmap
         res = read_pixels_24bit(bmpFile, &image_data);
         if (res != 0) {
             fclose(bmpFile);
-            return E_FAILED_TO_READ;
+            return res;
         }
 
     }
+    //everything went well ==> we can clean up now
     fclose(bmpFile);
 
     // Copy structures to return them

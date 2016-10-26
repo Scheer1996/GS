@@ -12,7 +12,7 @@
 #ifndef _ERRORS_H_
 #define _ERRORS_H_
 /**
- * couldn't open the file
+ * error when reading a file
  */
 #define E_FAILED_TO_READ -1
 
@@ -22,9 +22,14 @@
 #define E_INDEX_OUT_OF_BOUNDS -2
 
 /**
- * bad bitmap
+ * bad bitmap (invalid)
  */
 #define E_BAD_BITMAP -3
 
+/**
+ * not enough memory
+ */
+#define E_NO_MEMORY -4
 
-#endif /* AUFGABE3_ERRORS_H_ */
+
+#endif /* _ERRORS_H_ */

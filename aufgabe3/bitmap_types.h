@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    24.10.2016
+ * @date    26.10.2016
  * @brief   Typedefs for the Bitmaps
  ******************************************************************
  */
@@ -13,7 +13,7 @@
 #include "ms_types.h"
 
 /**
- * @brief The file header of the Bitmap
+ * @brief The file header of the bitmap
  */
 typedef struct __attribute__((__packed__)) {
     WORD bfType;
@@ -24,7 +24,7 @@ typedef struct __attribute__((__packed__)) {
 } BitmapFileHeader;
 
 /**
- * @brief The info header of the Bitmap
+ * @brief The info header of the bitmap
  */
 typedef struct __attribute__((__packed__)){
     DWORD biSize;
@@ -44,7 +44,7 @@ typedef struct __attribute__((__packed__)){
 /**
  * @brief The data (RGB values) of a single pixel
  */
-typedef struct {
+typedef struct __attribute__((__packed__)){
  unsigned char blue;
  unsigned char green;
  unsigned char red;
@@ -60,7 +60,7 @@ typedef struct {
 }VLA;
 
 /**
- * @brief Representation of a Bitmap
+ * @brief Representation of a bitmap
  */
 typedef struct {
     BitmapFileHeader fileHeader;

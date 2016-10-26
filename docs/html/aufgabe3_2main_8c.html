@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GSP - Entwicklerdokumentation: aufgabe2/output.h File Reference</title>
+<title>GSP - Entwicklerdokumentation: aufgabe3/main.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,75 +55,63 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('aufgabe2_2output_8h.html','');});
+$(document).ready(function(){initNavTree('aufgabe3_2main_8c.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">output.h File Reference</div>  </div>
+<div class="title">main.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header for the Output Display module.  
+<p>Main Program.  
 <a href="#details">More...</a></p>
-<table class="memberdecls">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="aufgabe3_2input_8h.html">input.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="my__vla_8h.html">my_vla.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="aufgabe3_2errors_8h.html">errors.h</a>&quot;</code><br />
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac0b2322a646cd633eb3cda4e15d058ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8h.html#ac0b2322a646cd633eb3cda4e15d058ee">output_update_data</a> (double angle, double speed)</td></tr>
-<tr class="memdesc:ac0b2322a646cd633eb3cda4e15d058ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the angle and speed of rotation on the screen.  <a href="#ac0b2322a646cd633eb3cda4e15d058ee">More...</a><br /></td></tr>
-<tr class="separator:ac0b2322a646cd633eb3cda4e15d058ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ec6f2da59d837b761d7cac40f26309"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8h.html#a69ec6f2da59d837b761d7cac40f26309">output_init</a> (void)</td></tr>
-<tr class="memdesc:a69ec6f2da59d837b761d7cac40f26309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the output (writing explanatory text)  <a href="#a69ec6f2da59d837b761d7cac40f26309">More...</a><br /></td></tr>
-<tr class="separator:a69ec6f2da59d837b761d7cac40f26309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86af0cda857a52e0190ef724c289de53"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe3_2main_8c.html#a86af0cda857a52e0190ef724c289de53">equal</a> (<a class="el" href="bitmap__types_8h.html#a7f641a4e103a0783401f433e54963e35">PixelData</a> p1, <a class="el" href="bitmap__types_8h.html#a7f641a4e103a0783401f433e54963e35">PixelData</a> p2)</td></tr>
+<tr class="separator:a86af0cda857a52e0190ef724c289de53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe3_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header for the Output Display module. </p>
+<div class="textblock"><p>Main Program. </p>
 <hr/>
 <dl class="section author"><dt>Author</dt><dd>Moritz Hoewer (<a href="#" onclick="location.href='mai'+'lto:'+'Mor'+'it'+'z.H'+'oe'+'wer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Morit<span style="display: none;">.nosp@m.</span>z.Ho<span style="display: none;">.nosp@m.</span>ewer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd>
 <dd>
 Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+'ch'+'eer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Phili<span style="display: none;">.nosp@m.</span>p.Sc<span style="display: none;">.nosp@m.</span>heer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>07.10.2016 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>24.10.2016 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a69ec6f2da59d837b761d7cac40f26309"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69ec6f2da59d837b761d7cac40f26309">&sect;&nbsp;</a></span>output_init()</h2>
+<a id="a86af0cda857a52e0190ef724c289de53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86af0cda857a52e0190ef724c289de53">&sect;&nbsp;</a></span>equal()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void output_init </td>
+          <td class="memname">static bool equal </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initializes the output (writing explanatory text) </p>
-
-</div>
-</div>
-<a id="ac0b2322a646cd633eb3cda4e15d058ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0b2322a646cd633eb3cda4e15d058ee">&sect;&nbsp;</a></span>output_update_data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void output_update_data </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>angle</em>, </td>
+          <td class="paramtype"><a class="el" href="bitmap__types_8h.html#a7f641a4e103a0783401f433e54963e35">PixelData</a>&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>speed</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="bitmap__types_8h.html#a7f641a4e103a0783401f433e54963e35">PixelData</a>&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -131,16 +119,32 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Updates the angle and speed of rotation on the screen. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>the angle in degrees </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">speed</td><td>the speed in degrees per second </td></tr>
-  </table>
-  </dd>
-</dl>
+</div>
+</div>
+<a id="a840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&sect;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>program entry</p>
+<dl class="section return"><dt>Returns</dt><dd>exit code </dd></dl>
 
 </div>
 </div>
@@ -149,7 +153,7 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="aufgabe2_2output_8h.html">output.h</a></li>
+    <li class="navelem"><a class="el" href="dir_3b668e2822d15a2f1373a5019e2f3846.html">aufgabe3</a></li><li class="navelem"><a class="el" href="aufgabe3_2main_8c.html">main.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

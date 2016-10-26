@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GSP - Entwicklerdokumentation: aufgabe2/output.h File Reference</title>
+<title>GSP - Entwicklerdokumentation: aufgabe3/errors.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,92 +55,97 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('aufgabe2_2output_8h.html','');});
+$(document).ready(function(){initNavTree('aufgabe3_2errors_8h.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">output.h File Reference</div>  </div>
+<div class="title">errors.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header for the Output Display module.  
+<p>Header for the error codes.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ac0b2322a646cd633eb3cda4e15d058ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8h.html#ac0b2322a646cd633eb3cda4e15d058ee">output_update_data</a> (double angle, double speed)</td></tr>
-<tr class="memdesc:ac0b2322a646cd633eb3cda4e15d058ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the angle and speed of rotation on the screen.  <a href="#ac0b2322a646cd633eb3cda4e15d058ee">More...</a><br /></td></tr>
-<tr class="separator:ac0b2322a646cd633eb3cda4e15d058ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ec6f2da59d837b761d7cac40f26309"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe2_2output_8h.html#a69ec6f2da59d837b761d7cac40f26309">output_init</a> (void)</td></tr>
-<tr class="memdesc:a69ec6f2da59d837b761d7cac40f26309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the output (writing explanatory text)  <a href="#a69ec6f2da59d837b761d7cac40f26309">More...</a><br /></td></tr>
-<tr class="separator:a69ec6f2da59d837b761d7cac40f26309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a5c5c55e031aea808be97fd249923bbbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe3_2errors_8h.html#a5c5c55e031aea808be97fd249923bbbf">E_FAILED_TO_READ</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a5c5c55e031aea808be97fd249923bbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6492b4eb93f8ef01b97c913c731266ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe3_2errors_8h.html#a6492b4eb93f8ef01b97c913c731266ce">E_INDEX_OUT_OF_BOUNDS</a>&#160;&#160;&#160;-2</td></tr>
+<tr class="separator:a6492b4eb93f8ef01b97c913c731266ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5e9f6c6340d27638cc416785091907"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe3_2errors_8h.html#afe5e9f6c6340d27638cc416785091907">E_BAD_BITMAP</a>&#160;&#160;&#160;-3</td></tr>
+<tr class="separator:afe5e9f6c6340d27638cc416785091907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af38d07f1af1bfdc44efa5c2ba5f4e1fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aufgabe3_2errors_8h.html#af38d07f1af1bfdc44efa5c2ba5f4e1fb">E_NO_MEMORY</a>&#160;&#160;&#160;-4</td></tr>
+<tr class="separator:af38d07f1af1bfdc44efa5c2ba5f4e1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header for the Output Display module. </p>
+<div class="textblock"><p>Header for the error codes. </p>
 <hr/>
 <dl class="section author"><dt>Author</dt><dd>Moritz Hoewer (<a href="#" onclick="location.href='mai'+'lto:'+'Mor'+'it'+'z.H'+'oe'+'wer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Morit<span style="display: none;">.nosp@m.</span>z.Ho<span style="display: none;">.nosp@m.</span>ewer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd>
 <dd>
 Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+'ch'+'eer'+'@h'+'aw-'+'ha'+'mbu'+'rg'+'.de'; return false;">Phili<span style="display: none;">.nosp@m.</span>p.Sc<span style="display: none;">.nosp@m.</span>heer@<span style="display: none;">.nosp@m.</span>haw-<span style="display: none;">.nosp@m.</span>hambu<span style="display: none;">.nosp@m.</span>rg.d<span style="display: none;">.nosp@m.</span>e</a>) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>07.10.2016 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a69ec6f2da59d837b761d7cac40f26309"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69ec6f2da59d837b761d7cac40f26309">&sect;&nbsp;</a></span>output_init()</h2>
+<dl class="section date"><dt>Date</dt><dd>24.10.2016 </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="afe5e9f6c6340d27638cc416785091907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5e9f6c6340d27638cc416785091907">&sect;&nbsp;</a></span>E_BAD_BITMAP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void output_init </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">#define E_BAD_BITMAP&#160;&#160;&#160;-3</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Initializes the output (writing explanatory text) </p>
+<p>bad bitmap (invalid) </p>
 
 </div>
 </div>
-<a id="ac0b2322a646cd633eb3cda4e15d058ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0b2322a646cd633eb3cda4e15d058ee">&sect;&nbsp;</a></span>output_update_data()</h2>
+<a id="a5c5c55e031aea808be97fd249923bbbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c5c55e031aea808be97fd249923bbbf">&sect;&nbsp;</a></span>E_FAILED_TO_READ</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void output_update_data </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>angle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>speed</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">#define E_FAILED_TO_READ&#160;&#160;&#160;-1</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>error when reading a file </p>
 
-<p>Updates the angle and speed of rotation on the screen. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>the angle in degrees </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">speed</td><td>the speed in degrees per second </td></tr>
-  </table>
-  </dd>
-</dl>
+</div>
+</div>
+<a id="a6492b4eb93f8ef01b97c913c731266ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6492b4eb93f8ef01b97c913c731266ce">&sect;&nbsp;</a></span>E_INDEX_OUT_OF_BOUNDS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define E_INDEX_OUT_OF_BOUNDS&#160;&#160;&#160;-2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>illegal <a class="el" href="struct_v_l_a.html" title="Wraps the pointer to the memory containing data and array size. ">VLA</a> access </p>
+
+</div>
+</div>
+<a id="af38d07f1af1bfdc44efa5c2ba5f4e1fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af38d07f1af1bfdc44efa5c2ba5f4e1fb">&sect;&nbsp;</a></span>E_NO_MEMORY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define E_NO_MEMORY&#160;&#160;&#160;-4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>not enough memory </p>
 
 </div>
 </div>
@@ -149,7 +154,7 @@ Philip Scheer (<a href="#" onclick="location.href='mai'+'lto:'+'Phi'+'li'+'p.S'+
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e6f4133635a47086ce820f4b47873b7f.html">aufgabe2</a></li><li class="navelem"><a class="el" href="aufgabe2_2output_8h.html">output.h</a></li>
+    <li class="navelem"><a class="el" href="dir_3b668e2822d15a2f1373a5019e2f3846.html">aufgabe3</a></li><li class="navelem"><a class="el" href="aufgabe3_2errors_8h.html">errors.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

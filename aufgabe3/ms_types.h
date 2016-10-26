@@ -1,10 +1,10 @@
 /** ****************************************************************
  * @file    aufgabe3/ms_types.h
- * @author  Marcel Roethke
+ * @author  Marcel Roethke (original author)
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    22.10.2016
+ * @date    26.10.2016
  * @brief   Header for Microsoft Types
  ******************************************************************
  */

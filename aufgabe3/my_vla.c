@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    25.10.2016
+ * @date    26.10.2016
  * @brief   Implementation for VLA
  ******************************************************************
  */
@@ -23,7 +23,7 @@ int vla_get(int x, int y, VLA *vla, PixelData *ref) {
     }
 
     // calculate offset
-    int offset = x * vla->height + y;
+    int offset = y * vla->width + x;
 
     *ref = vla->data[offset];
     return 0;
@@ -42,7 +42,7 @@ int vla_set(int x, int y, VLA *vla, PixelData data) {
     }
 
     // calculate offset
-    int offset = x * vla->height + y;
+    int offset = y * vla->width + x;
 
     vla->data[offset] = data;
     return 0;

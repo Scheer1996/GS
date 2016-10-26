@@ -61,6 +61,13 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <div class="contents">
 <div class="textblock">Here is a list of all functions, variables, defines, enums, and typedefs with links to the files they belong to:</div>
 
+<h3><a id="index__"></a>- _ -</h3><ul>
+<li>__attribute__()
+: <a class="el" href="bitmap__types_8h.html#ad09246453a4dabd919c7541484046a87">bitmap_types.h</a>
+</li>
+</ul>
+
+
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>add()
 : <a class="el" href="rpn_8c.html#a54d5c3a0476a0140c553ac25c72cb23e">rpn.c</a>
@@ -75,18 +82,39 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>BACKWARD_LED
 : <a class="el" href="hardware__io_8c.html#a1f2c885421de46ac644f6a6ef61e8cac">hardware_io.c</a>
 </li>
+<li>BitmapFileHeader
+: <a class="el" href="bitmap__types_8h.html#ae98c0349a0ef791ef83ee86f5c95cd2e">bitmap_types.h</a>
+</li>
+<li>BitmapInfoHeader
+: <a class="el" href="bitmap__types_8h.html#a4788295697c79ef3ff6f670bb7d0e3d1">bitmap_types.h</a>
+</li>
+<li>BOOL
+: <a class="el" href="ms__types_8h.html#a975dbe9e4396bf9e0064ce01827fa372">ms_types.h</a>
+</li>
 <li>BUFFER_SIZE
 : <a class="el" href="aufgabe1_2output_8c.html#a6b20d41d6252e9871430c242cb1a56e7">output.c</a>
+</li>
+<li>BYTE
+: <a class="el" href="ms__types_8h.html#aae9749d96e15ccb4f482dd5f55d98f9b">ms_types.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>CHAR
+: <a class="el" href="ms__types_8h.html#a5b215426da76ecdb76c8600a0a09cf1b">ms_types.h</a>
+</li>
 <li>clear_number_area()
 : <a class="el" href="aufgabe1_2output_8c.html#afe7e4abf0abd66f2153d491328cf96f4">output.c</a>
 </li>
 <li>clear_stack_area()
 : <a class="el" href="aufgabe1_2output_8c.html#aed279226e6e97f04e9a42a9c0fcaf9a1">output.c</a>
+</li>
+<li>COLOR_TABLE_SIZE
+: <a class="el" href="aufgabe3_2input_8c.html#a28f21052ebe259bfb63b2d127f01b5fd">input.c</a>
+</li>
+<li>ColorTableEntry
+: <a class="el" href="bitmap__types_8h.html#a56898c43d70ebfc5770224539d40d915">bitmap_types.h</a>
 </li>
 <li>CPR
 : <a class="el" href="rotary__encoder_8c.html#ad8f1771d4051eafad228df4d397d7e47">rotary_encoder.c</a>
@@ -113,12 +141,24 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>duplicate()
 : <a class="el" href="rpn_8c.html#ad848d3330ff653f9d7aaa4502458cdd7">rpn.c</a>
 </li>
+<li>DWORD
+: <a class="el" href="ms__types_8h.html#af483253b2143078cede883fc3c111ad2">ms_types.h</a>
+</li>
 </ul>
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
+<li>E_BAD_BITMAP
+: <a class="el" href="aufgabe3_2errors_8h.html#afe5e9f6c6340d27638cc416785091907">errors.h</a>
+</li>
 <li>E_DIVIDE_0
 : <a class="el" href="aufgabe1_2errors_8h.html#a1970c7598b529667a56a533e5c7d8239">errors.h</a>
+</li>
+<li>E_FAILED_TO_READ
+: <a class="el" href="aufgabe3_2errors_8h.html#a5c5c55e031aea808be97fd249923bbbf">errors.h</a>
+</li>
+<li>E_INDEX_OUT_OF_BOUNDS
+: <a class="el" href="aufgabe3_2errors_8h.html#a6492b4eb93f8ef01b97c913c731266ce">errors.h</a>
 </li>
 <li>E_INVALID_INPUT
 : <a class="el" href="aufgabe1_2errors_8h.html#a728610e2f7568f99d3a5048a93eb2b7e">errors.h</a>
@@ -128,6 +168,9 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </li>
 <li>E_MISSING_OPERAND
 : <a class="el" href="aufgabe1_2errors_8h.html#a995726b7ae530e53d45db8a752e268e4">errors.h</a>
+</li>
+<li>E_NO_MEMORY
+: <a class="el" href="aufgabe3_2errors_8h.html#af38d07f1af1bfdc44efa5c2ba5f4e1fb">errors.h</a>
 </li>
 <li>E_OVERFLOW
 : <a class="el" href="aufgabe1_2errors_8h.html#a2ae9bebfa7ace670d4d2718bd17142b1">errors.h</a>
@@ -153,8 +196,8 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="rotary__encoder_8h.html#a1ac51c5e1237aef0f03e64e8787595c7">rotary_encoder.h</a>
 </li>
 <li>encoder_get_position_raw()
-: <a class="el" href="rotary__encoder_8h.html#adfc380b8d74a7153b572a0dd4505670d">rotary_encoder.h</a>
-, <a class="el" href="rotary__encoder_8c.html#ae3510912bb22ee5d16d71fcc6906195e">rotary_encoder.c</a>
+: <a class="el" href="rotary__encoder_8c.html#ae3510912bb22ee5d16d71fcc6906195e">rotary_encoder.c</a>
+, <a class="el" href="rotary__encoder_8h.html#adfc380b8d74a7153b572a0dd4505670d">rotary_encoder.h</a>
 </li>
 <li>encoder_init()
 : <a class="el" href="rotary__encoder_8c.html#a1810f19ef7d35edd2e26a7d4ee29f6bc">rotary_encoder.c</a>
@@ -165,8 +208,11 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="rotary__encoder_8h.html#a9b981ff872a2d0d83281b09cd467f781">rotary_encoder.h</a>
 </li>
 <li>encoder_update()
-: <a class="el" href="rotary__encoder_8c.html#a0b881ce2add0dd26a0769b05ef7edb18">rotary_encoder.c</a>
-, <a class="el" href="rotary__encoder_8h.html#af9bd0f9d10cffb6fd4fb374076e070ac">rotary_encoder.h</a>
+: <a class="el" href="rotary__encoder_8h.html#af9bd0f9d10cffb6fd4fb374076e070ac">rotary_encoder.h</a>
+, <a class="el" href="rotary__encoder_8c.html#a0b881ce2add0dd26a0769b05ef7edb18">rotary_encoder.c</a>
+</li>
+<li>equal()
+: <a class="el" href="aufgabe3_2main_8c.html#a86af0cda857a52e0190ef724c289de53">main.c</a>
 </li>
 <li>ERROR_LED
 : <a class="el" href="hardware__io_8c.html#a1ee79833df3d87e0c016f364254899e9">hardware_io.c</a>
@@ -185,7 +231,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 <h3><a id="index_f"></a>- f -</h3><ul>
 <li>FAKTOR
-: <a class="el" href="input_8c.html#aee6d81d9652671ecd9f11db2ca5eb4a9">input.c</a>
+: <a class="el" href="aufgabe1_2input_8c.html#aee6d81d9652671ecd9f11db2ca5eb4a9">input.c</a>
 </li>
 <li>FORWARD
 : <a class="el" href="rotary__encoder_8h.html#a224b9163917ac32fc95a60d8c1eec3aaaa26736999186daf8146f809e863712a1">rotary_encoder.h</a>
@@ -201,10 +247,10 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="aufgabe1_2output_8c.html#a617c9885d72be25a7a35302526c400d6">output.c</a>
 </li>
 <li>get_char()
-: <a class="el" href="input_8c.html#a50c6fd197d7d89cbd1104c8e20b767ae">input.c</a>
+: <a class="el" href="aufgabe1_2input_8c.html#a50c6fd197d7d89cbd1104c8e20b767ae">input.c</a>
 </li>
 <li>get_operator_token()
-: <a class="el" href="input_8c.html#ac206a038de314391fcb02a0c017c61a1">input.c</a>
+: <a class="el" href="aufgabe1_2input_8c.html#ac206a038de314391fcb02a0c017c61a1">input.c</a>
 </li>
 <li>get_phase()
 : <a class="el" href="rotary__encoder_8c.html#aaf3a132a78f95d56182fd3b80f031ec0">rotary_encoder.c</a>
@@ -253,15 +299,22 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="timer_8h.html#a02922529b60419a94afe8f369dda070b">timer.h</a>
 </li>
 <li>input_get_next_token()
-: <a class="el" href="input_8h.html#af2ec89408a19986b4d616dd58b93646e">input.h</a>
-, <a class="el" href="input_8c.html#af2ec89408a19986b4d616dd58b93646e">input.c</a>
+: <a class="el" href="aufgabe1_2input_8h.html#af2ec89408a19986b4d616dd58b93646e">input.h</a>
+, <a class="el" href="aufgabe1_2input_8c.html#af2ec89408a19986b4d616dd58b93646e">input.c</a>
 </li>
 <li>input_init()
-: <a class="el" href="input_8h.html#a002df33f6298c53d5ab3892e473bcbde">input.h</a>
-, <a class="el" href="input_8c.html#a002df33f6298c53d5ab3892e473bcbde">input.c</a>
+: <a class="el" href="aufgabe1_2input_8c.html#a002df33f6298c53d5ab3892e473bcbde">input.c</a>
+, <a class="el" href="aufgabe1_2input_8h.html#a002df33f6298c53d5ab3892e473bcbde">input.h</a>
+</li>
+<li>input_read_file()
+: <a class="el" href="aufgabe3_2input_8c.html#ab7eec9ff0c488787e277b53d716a3685">input.c</a>
+, <a class="el" href="aufgabe3_2input_8h.html#ab7eec9ff0c488787e277b53d716a3685">input.h</a>
 </li>
 <li>is_pin_high()
 : <a class="el" href="hardware__io_8c.html#abbe585d4c4ec4ac385dd51006ac6fc38">hardware_io.c</a>
+</li>
+<li>is_valid()
+: <a class="el" href="aufgabe3_2input_8c.html#aeddfb687517d351ec1088a44a3f5dcce">input.c</a>
 </li>
 </ul>
 
@@ -272,6 +325,9 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </li>
 <li>LINE_2_Y
 : <a class="el" href="aufgabe2_2output_8c.html#ac0e823755049383aa703b600cfa722ed">output.c</a>
+</li>
+<li>LONG
+: <a class="el" href="ms__types_8h.html#a27ec6163192f1e1e72d87421379ea3d4">ms_types.h</a>
 </li>
 </ul>
 
@@ -357,7 +413,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </li>
 <li>output_init()
 : <a class="el" href="aufgabe2_2output_8c.html#a8aff2e47a9b5548cc175d2963113f105">output.c</a>
-, <a class="el" href="aufgabe2_2output_8h.html#a8aff2e47a9b5548cc175d2963113f105">output.h</a>
+, <a class="el" href="aufgabe2_2output_8h.html#a69ec6f2da59d837b761d7cac40f26309">output.h</a>
 </li>
 <li>output_update_data()
 : <a class="el" href="aufgabe2_2output_8h.html#ac0b2322a646cd633eb3cda4e15d058ee">output.h</a>
@@ -367,6 +423,9 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
+<li>PixelData
+: <a class="el" href="bitmap__types_8h.html#a7f641a4e103a0783401f433e54963e35">bitmap_types.h</a>
+</li>
 <li>position
 : <a class="el" href="rotary__encoder_8c.html#a401e942526aac47cef94f478182486e7">rotary_encoder.c</a>
 </li>
@@ -377,12 +436,30 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>read_color_table()
+: <a class="el" href="aufgabe3_2input_8c.html#a125374f46c22e00f06b28acf1f8804ed">input.c</a>
+</li>
+<li>read_headers()
+: <a class="el" href="aufgabe3_2input_8c.html#ad3558a9149e66b6e4301d595f33e0a4e">input.c</a>
+</li>
+<li>read_pixels_24bit()
+: <a class="el" href="aufgabe3_2input_8c.html#a1a424fbce0d3f91984e8d6f5610ceef2">input.c</a>
+</li>
+<li>read_pixels_8bit()
+: <a class="el" href="aufgabe3_2input_8c.html#a26af13500706014b092e032698712bd7">input.c</a>
+</li>
+<li>read_pixels_8bit_rle()
+: <a class="el" href="aufgabe3_2input_8c.html#aeb77f3a09e2924c2156dce9d45a9fe68">input.c</a>
+</li>
+<li>read_two_bytes()
+: <a class="el" href="aufgabe3_2input_8c.html#a935755a022577f57e78bf49e15e94c3a">input.c</a>
+</li>
 <li>reverse()
 : <a class="el" href="rpn_8c.html#a84aa98bc2cb9cd25851e4eff9d40c086">rpn.c</a>
 </li>
 <li>rpn_process_token()
-: <a class="el" href="rpn_8h.html#af7c0aecdf9a3aad7f5c339c1cb6c908a">rpn.h</a>
-, <a class="el" href="rpn_8c.html#af7c0aecdf9a3aad7f5c339c1cb6c908a">rpn.c</a>
+: <a class="el" href="rpn_8c.html#af7c0aecdf9a3aad7f5c339c1cb6c908a">rpn.c</a>
+, <a class="el" href="rpn_8h.html#af7c0aecdf9a3aad7f5c339c1cb6c908a">rpn.h</a>
 </li>
 </ul>
 
@@ -394,6 +471,9 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>SEPERATOR_LENGTH
 : <a class="el" href="aufgabe1_2output_8c.html#a6aa632b7f2430df74a98b025fa3baf19">output.c</a>
 </li>
+<li>SHORT
+: <a class="el" href="ms__types_8h.html#a78509a33db204fd62f2f684019150cf8">ms_types.h</a>
+</li>
 <li>size
 : <a class="el" href="stack_8c.html#a439227feff9d7f55384e8780cfc2eb82">stack.c</a>
 </li>
@@ -404,8 +484,8 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="stack_8c.html#afbe9169b649ea5d559b3c61d89608d5d">stack.c</a>
 </li>
 <li>stack_clear()
-: <a class="el" href="stack_8c.html#ab8bb76f06254e9e31a3700b4f2a54c2d">stack.c</a>
-, <a class="el" href="stack_8h.html#ab8bb76f06254e9e31a3700b4f2a54c2d">stack.h</a>
+: <a class="el" href="stack_8h.html#ab8bb76f06254e9e31a3700b4f2a54c2d">stack.h</a>
+, <a class="el" href="stack_8c.html#ab8bb76f06254e9e31a3700b4f2a54c2d">stack.c</a>
 </li>
 <li>STACK_LINES
 : <a class="el" href="aufgabe1_2output_8c.html#a26f45afcb28be8cb7a0d4212e6b4bf7f">output.c</a>
@@ -415,8 +495,8 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="stack_8h.html#a2182834c86ce8454e2cdbee542231c86">stack.h</a>
 </li>
 <li>stack_push()
-: <a class="el" href="stack_8c.html#ab71548a340e828a725e54875aa66f415">stack.c</a>
-, <a class="el" href="stack_8h.html#ab71548a340e828a725e54875aa66f415">stack.h</a>
+: <a class="el" href="stack_8h.html#ab71548a340e828a725e54875aa66f415">stack.h</a>
+, <a class="el" href="stack_8c.html#ab71548a340e828a725e54875aa66f415">stack.c</a>
 </li>
 <li>STACK_SIZE
 : <a class="el" href="stack_8c.html#a6423a880df59733d2d9b509c7718d3a9">stack.c</a>
@@ -457,6 +537,21 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <h3><a id="index_v"></a>- v -</h3><ul>
 <li>valid_state
 : <a class="el" href="rotary__encoder_8c.html#abf271d18df1d9f738caf9433354dab85">rotary_encoder.c</a>
+</li>
+<li>vla_get()
+: <a class="el" href="my__vla_8c.html#a98e79b69b5ee6855bc4f57c9804c2495">my_vla.c</a>
+, <a class="el" href="my__vla_8h.html#a98e79b69b5ee6855bc4f57c9804c2495">my_vla.h</a>
+</li>
+<li>vla_set()
+: <a class="el" href="my__vla_8c.html#a13d7ebb0e0a0533e011490baec4d98fb">my_vla.c</a>
+, <a class="el" href="my__vla_8h.html#a13d7ebb0e0a0533e011490baec4d98fb">my_vla.h</a>
+</li>
+</ul>
+
+
+<h3><a id="index_w"></a>- w -</h3><ul>
+<li>WORD
+: <a class="el" href="ms__types_8h.html#ab24077addd3b7b13e086987ff296552c">ms_types.h</a>
 </li>
 </ul>
 </div><!-- contents -->
