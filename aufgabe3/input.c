@@ -20,6 +20,37 @@
 #define COLOR_TABLE_SIZE 256
 
 /**
+ * type "BM" for File Header
+ */
+#define BF_TYPE 0x4d42
+
+/**
+ * Info header Size
+ */
+#define INFO_HEADER_SIZE 40
+
+/**
+ * Bit count for 8 Bit
+ */
+#define BI_BIT_COUNT8 8
+
+/**
+ * Bit count for 24 Bit
+ */
+#define BI_BIT_COUNT24 24
+
+/**
+ * Info Header Bi Compression True
+ */
+#define INFO_HEADER_BI_COMPRESSION_TRUE 1
+
+/**
+ * Info Header Bi Compression False
+ */
+#define INFO_HEADER_BI_COMPRESSION_FALSE 0
+
+
+/**
  * reads the bitmap headers from a file
  *
  * @param[in]  file       the file to read from
@@ -355,7 +386,7 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
 static bool is_valid(BitmapFileHeader *fileHeader, BitmapInfoHeader *infoHeader) {
     // check file header
     // type must be BM (ASCII)
-    if (fileHeader->bfType != 0x4d42) {
+    if (fileHeader->bfType != BF_TYPE) {
         return false;
     }
 
@@ -366,7 +397,7 @@ static bool is_valid(BitmapFileHeader *fileHeader, BitmapInfoHeader *infoHeader)
 
     // check info header
     // info header size must be 40
-    if (infoHeader->biSize != 40) {
+    if (infoHeader->biSize != INFO_HEADER_SIZE) {
         return false;
     }
 
@@ -381,12 +412,12 @@ static bool is_valid(BitmapFileHeader *fileHeader, BitmapInfoHeader *infoHeader)
     }
 
     // bit count must be 8 or 24
-    if (infoHeader->biBitCount != 8 && infoHeader->biBitCount != 24) {
+    if (infoHeader->biBitCount != BI_BIT_COUNT8 && infoHeader->biBitCount != BI_BIT_COUNT24) {
         return false;
     }
 
     // compression must be 0 or 1
-    if (infoHeader->biCompression != 1 && infoHeader->biCompression != 0) {
+    if (infoHeader->biCompression != INFO_HEADER_BI_COMPRESSION_TRUE && infoHeader->biCompression != INFO_HEADER_BI_COMPRESSION_FALSE) {
         return false;
     }
 
