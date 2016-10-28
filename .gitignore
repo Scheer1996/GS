@@ -8,3 +8,5 @@
 
 #Include directory so eclipse can give me error checking
 /include/
+/bin/
+/Debug/
