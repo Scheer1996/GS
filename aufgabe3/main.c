@@ -35,7 +35,8 @@ int main(void) {
 
     //char* path = "C:\\Users\\abz254\\Downloads\\testBilder\\Eigene\\";
     //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\Eigene\\";
-    char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\";
+    //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\";
+    char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
 
     // Eigene
     //char* filename = "Black_Square_256.bmp";
