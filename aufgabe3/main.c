@@ -15,6 +15,11 @@
 #include "my_vla.h"
 #include "errors.h"
 
+/*
+ * I want Pixeldata output
+ */
+#define DEBUG_PRINT_PIXELDATA 0
+
 static bool equal(PixelData p1, PixelData p2) {
     return p1.red == p2.red && p1.green == p2.green && p1.blue == p2.blue;
 }
@@ -44,21 +49,22 @@ int main(void) {
     //char* filename = "Black_Square_asym_256_RLE.bmp";
 
     // TestBilder
-    //char* filename = "amrandrle.bmp"; //FAILS (failed to read (510/479))
+    //char* filename = "amrandrle.bmp";
     //char* filename = "amrandrle_NO_BLUE_LINES.bmp";
-    //char* filename = "amrandrleMod.bmp"; //FAILS (failed to read (510/479))
-    //char* filename = "anderegroesse.bmp"; // FAILS (index out of bounds (721/256))
-    char* filename = "aufgabe3_bild1.bmp";
-    //char* filename = "aufgabe3_bild2.bmp"; // FAILS (absolute mode x zu gross (641/426))
-    //char* filename = "rotmitlochamrand.bmp"; // FAILS (index out of bounds (641/446))
-    //char* filename = "rotmitlochrle.bmp"; // FAILS (absolute mode x zu gross (641/446))
-    //char* filename = "rotmitlochrlemod1.bmp"; // FAILS (index out of bounds (129/479)
-    //char* filename = "rotmitlochrlemod2.bmp"; // FAILS (failed to read (163/443))
+    //char* filename = "amrandrleMod.bmp"; //FAILS (index out of bounds)
+    //char* filename = "anderegroesse.bmp";
+    //char* filename = "aufgabe3_bild1.bmp";
+    char* filename = "aufgabe3_bild2.bmp";
+    //char* filename = "rotmitlochamrand.bmp";
+    //char* filename = "rotmitlochrle.bmp";
+    //char* filename = "rotmitlochrlemod1.bmp"; // FAILS (index out of bounds)
+    //char* filename = "rotmitlochrlemod2.bmp";
     //char* filename = "rotmitlochrlemod3.bmp"; // FAILS (width is 50.331.776 and malloc fails)
     //char* filename = "rotmitlochrlemod4.bmp"; // FAILS (width is 3.014.656 and malloc fails)
-    //char* filename = "rotmitlochrleundpunkt.bmp"; // FAILS (absolute mode x zu gross (641/446))
+    //char* filename = "rotmitlochrleundpunkt.bmp";
 
     // Stand 26.10. ==> 2 / 13 funktionieren
+    // Stand 29.10. ==> 9 / 13 funktionieren (die beiden OOM sind nicht unsere schuld)
 
     char filepath[100] = { 0 };
     strcat(filepath, path);
@@ -97,8 +103,9 @@ int main(void) {
                     printf("Oh Oh, gaaaanz schlecht\n");
                     break;
                 }
-
-                //printf("(%3d %3d %3d)", p.red, p.green, p.blue);
+#if DEBUG_PRINT_PIXELDATA
+                printf("(%3d %3d %3d)", p.red, p.green, p.blue);
+#endif
 
                 if (!red && equal(p, RED)) {
                     red = 1;
@@ -118,7 +125,9 @@ int main(void) {
                     }
                 }
             }
-            //printf("\n");
+#if DEBUG_PRINT_PIXELDATA
+            printf("\n");
+#endif
         }
 
         free(bm.imageData.data);
@@ -131,11 +140,17 @@ int main(void) {
     } else {
         if (res == E_BAD_BITMAP) {
             printf("Bad Bitmap");
+        } else if (res == E_FAILED_TO_READ) {
+            printf("Failed to Read");
+            perror("Deswegen");
+        } else if (res == E_INDEX_OUT_OF_BOUNDS) {
+            printf("Index out of Bounds");
+        } else if (res == E_NO_MEMORY) {
+            printf("Out of memory");
         } else {
-            if (res == E_FAILED_TO_READ) {
-                printf("Failed to read");
-            }
+            printf("Irgendein Fehler");
         }
+
     }
 
     return EXIT_SUCCESS;

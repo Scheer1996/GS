@@ -32,23 +32,32 @@
 /**
  * Bit count for 8 Bit
  */
-#define BI_BIT_COUNT8 8
+#define BITMAP_8BIT 8
 
 /**
  * Bit count for 24 Bit
  */
-#define BI_BIT_COUNT24 24
+#define BITMAP_24BIT 24
 
 /**
  * Info Header Bi Compression True
  */
-#define INFO_HEADER_BI_COMPRESSION_TRUE 1
+#define COMPRESSION_RLE 1
 
 /**
  * Info Header Bi Compression False
  */
-#define INFO_HEADER_BI_COMPRESSION_FALSE 0
+#define COMPRESSION_NONE 0
 
+/**
+ * size of WORD for aligning in RLE absolute mode
+ */
+#define WORD_SIZE 4
+
+/*
+ * I want debug messages
+ */
+#define DEBUG_RLE 0
 
 /**
  * reads the bitmap headers from a file
@@ -251,57 +260,27 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
     image_data->data = data;
 
     unsigned char b1, b2;
-    bool was_absolute = false;
     int current_x = 0;
     int current_y = image_data->height - 1; // image is stored "upside down"
     size_t readSize;
 
     while (1) {
-        if (was_absolute) {
-            // we just finished an absolute mode
-            // if next byte is 00 or 01, we need to count them as controls
-            was_absolute = false;
-
-            readSize = fread(&b1, sizeof(b1), 1, file);
-            if (readSize != 1) {
-                free(data);
-                return E_FAILED_TO_READ;
-            }
-
-            if (b1 == 0) {
-                // EOL
-                current_x = 0;
-                current_y--;
-
-                // Read next two bytes from Image as usual
-                if (read_two_bytes(&b1, &b2, file)) {
-                    free(data);
-                    return E_FAILED_TO_READ;
-                }
-            } else if (b1 == 1) {
-                // EOF
-                break;
-            } else {
-                // ok, it wasn't a control sequence ==> read 2nd byte and
-                // pretend nothing special happened
-                readSize = fread(&b2, sizeof(b2), 1, file);
-                if (readSize != 1) {
-                    free(data);
-                    return E_FAILED_TO_READ;
-                }
-            }
-        } else {
-            // Read two bytes from Image
-            if (read_two_bytes(&b1, &b2, file)) {
-                free(data);
-                return E_FAILED_TO_READ;
-            }
+        // Read two bytes from Image
+        if (read_two_bytes(&b1, &b2, file)) {
+            free(data);
+            return E_FAILED_TO_READ;
         }
+#if DEBUG_RLE
+        printf("%02x %02x ", b1, b2);
+#endif
 
         if (b1 == 0) {
             // control sequence
             if (b2 == 0) {
                 // EOL
+#if DEBUG_RLE
+                printf("\n");
+#endif
                 current_y--;
                 current_x = 0;
             } else if (b2 == 1) {
@@ -323,7 +302,9 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
 
             } else {
                 // absolute mode
-                was_absolute = true;
+#if DEBUG_RLE
+                printf("ABS [");
+#endif
 
                 //b2 has number of pixels in absolute mode
                 for (int i = 0; i < b2; i++) {
@@ -334,6 +315,9 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
                         free(data);
                         return E_FAILED_TO_READ;
                     }
+#if DEBUG_RLE
+                    printf(" %02x", b1);
+#endif
 
                     // get color and write it to VLA
                     ColorTableEntry c = color_table[b1];
@@ -347,13 +331,23 @@ static int read_pixels_8bit_rle(FILE* file, ColorTableEntry* color_table,
                     // increment x
                     current_x++;
                 }
+#if DEBUG_RLE
+                printf(" ] ");
+#endif
 
-                // read next byte (will be 00, end of absolute mode)
-                readSize = fread(&b1, sizeof(b1), 1, file);
-                if (readSize != 1) {
-                    free(data);
-                    return E_FAILED_TO_READ;
+                int align = b2 % WORD_SIZE;
+                if (align != 0) {
+                    // need to throw away some bits for aligning
+                    align = WORD_SIZE - align;
+#if DEBUG_RLE
+                    printf("IGNORING %d FOR ALIGN ", align);
+#endif
+                    if (fseek(file, align, SEEK_CUR) != 0) {
+                        free(data);
+                        return E_FAILED_TO_READ;
+                    }
                 }
+
             }
         } else { /* if(b1 == 0) */
             // normal RLE mode
@@ -412,12 +406,14 @@ static bool is_valid(BitmapFileHeader *fileHeader, BitmapInfoHeader *infoHeader)
     }
 
     // bit count must be 8 or 24
-    if (infoHeader->biBitCount != BI_BIT_COUNT8 && infoHeader->biBitCount != BI_BIT_COUNT24) {
+    if (infoHeader->biBitCount != BITMAP_8BIT
+            && infoHeader->biBitCount != BITMAP_24BIT) {
         return false;
     }
 
     // compression must be 0 or 1
-    if (infoHeader->biCompression != INFO_HEADER_BI_COMPRESSION_TRUE && infoHeader->biCompression != INFO_HEADER_BI_COMPRESSION_FALSE) {
+    if (infoHeader->biCompression != COMPRESSION_RLE
+            && infoHeader->biCompression != COMPRESSION_NONE) {
         return false;
     }
 
@@ -437,7 +433,7 @@ int input_read_file(char* path, Bitmap* bitmap) {
     FILE* bmpFile;
 
     // Open file
-    bmpFile = fopen(path, "r");
+    bmpFile = fopen(path, "rb");
     if (bmpFile == NULL) {
         return E_FAILED_TO_READ;
     }
