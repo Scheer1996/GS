@@ -31,5 +31,10 @@
  */
 #define E_NO_MEMORY -4
 
+/**
+ * error when creating file for writing
+ */
+#define E_FAILED_TO_WRITE -5
+
 
 #endif /* _ERRORS_H_ */

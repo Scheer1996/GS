@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "input.h"
+#include "output.h"
 #include "my_vla.h"
 #include "errors.h"
 
@@ -81,6 +82,7 @@ int main(void) {
         printf("\nPixel Data\n");
 
         int red = 0;
+        int green = 0;
 
         typedef struct {
             int x;
@@ -90,6 +92,10 @@ int main(void) {
         bool firstRed = true;
         pos red_start;
         pos red_end;
+
+        bool firstGreen = true;
+        pos green_start;
+        pos green_end;
 
         PixelData RED = { 0, 0, 255 };
         PixelData GREEN = { 0, 255, 0 };
@@ -125,6 +131,28 @@ int main(void) {
                         red_end.y = y;
                     }
                 }
+
+
+                /**
+                 * das selbe in Grün hahahaha
+                 */
+                if (!green && equal(p, GREEN)) {
+                    green = 1;
+                    if (firstGreen) {
+                        firstGreen = false;
+                        green_start.x = x;
+                        green_start.y = y;
+                    }
+                } else if (green && !equal(p, GREEN)) {
+                	green = 0;
+                    if (x == 0) {
+                    	green_end.x = bm.imageData.width;
+                        green_end.y = y - 1;
+                    } else {
+                    	green_end.x = x - 1;
+                        green_end.y = y;
+                    }
+                }
             }
 #if DEBUG_PRINT_PIXELDATA
             printf("\n");
@@ -137,6 +165,18 @@ int main(void) {
         // Green from 302/192 to 566/436
         printf("Red from (%d | %d) to (%d | %d)\n", red_start.x, red_start.y,
                 red_end.x, red_end.y);
+        printf("Green from (%d | %d) to (%d | %d)\n", green_start.x, green_start.y,
+                green_end.x, green_end.y);
+
+
+        /**
+         * SHORT Save test
+         */
+        char saveFilePath[100] = { 0 };
+        strcat(saveFilePath, path);
+        strcat(saveFilePath, "test.bmp");
+
+        res = output_write_file(saveFilePath, &bm);
 
     } else {
         if (res == E_BAD_BITMAP) {
