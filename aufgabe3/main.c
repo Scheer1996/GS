@@ -37,14 +37,15 @@ int main(void) {
     //char* path = "C:\\Users\\abz254\\Downloads\\testBilder\\Eigene\\";
     //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\Eigene\\";
     //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\";
-    char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
+    //char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
+    char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/Eigene/";
 
     // Eigene
-    //char* filename = "Black_Square_256.bmp";
+    char* filename = "Black_Square_256.bmp";
     //char* filename = "RGB_White_Black_256.bmp";
     //char* filename = "Black_Square_256_RLE.bmp";
     //char* filename = "RGB_White_Black_256_RLE.bmp";
-    //char* filename = "Black_Square.bmp";
+    //char* filename = "Black_Square.bmp"; //writing works
     //char* filename = "RGB_White_Black.bmp";
     //char* filename = "Black_Square_asym.bmp";
     //char* filename = "Black_Square_asym_256.bmp";
@@ -56,7 +57,7 @@ int main(void) {
     //char* filename = "amrandrleMod.bmp"; //FAILS (index out of bounds)
     //char* filename = "anderegroesse.bmp";
     //char* filename = "aufgabe3_bild1.bmp";
-    char* filename = "aufgabe3_bild2.bmp";
+    //char* filename = "aufgabe3_bild2.bmp";
     //char* filename = "rotmitlochamrand.bmp";
     //char* filename = "rotmitlochrle.bmp";
     //char* filename = "rotmitlochrlemod1.bmp"; // FAILS (index out of bounds)
@@ -159,8 +160,7 @@ int main(void) {
 #endif
         }
 
-        free(bm.imageData.data);
-
+        //free(bm.imageData.data);
         // Red from 56/110 to 280/249
         // Green from 302/192 to 566/436
         printf("Red from (%d | %d) to (%d | %d)\n", red_start.x, red_start.y,
@@ -168,13 +168,9 @@ int main(void) {
         printf("Green from (%d | %d) to (%d | %d)\n", green_start.x, green_start.y,
                 green_end.x, green_end.y);
 
-
-        /**
-         * SHORT Save test
-         */
         char saveFilePath[100] = { 0 };
         strcat(saveFilePath, path);
-        strcat(saveFilePath, "test.bmp");
+        strcat(saveFilePath, "testSpeichern.bmp");
 
         res = output_write_file(saveFilePath, &bm);
 
@@ -188,6 +184,8 @@ int main(void) {
             printf("Index out of Bounds");
         } else if (res == E_NO_MEMORY) {
             printf("Out of memory");
+        } else if (res == E_FAILED_TO_WRITE) {
+            printf("Failed to Write");
         } else {
             printf("Irgendein Fehler");
         }
