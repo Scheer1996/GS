@@ -2,7 +2,7 @@ CC = gcc
 CCFLAGS = -std=c99 -g -mno-ms-bitfields
 LDFLAGS = -g
 
-SRC = main.c input.c output.c my_vla.c
+SRC = main.c input.c output.c my_vla.c analyze.c
 OBJ = $(SRC:%.c=%.o)
 
 all: Aufgabe3

@@ -37,11 +37,11 @@ int main(void) {
     //char* path = "C:\\Users\\abz254\\Downloads\\testBilder\\Eigene\\";
     //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\Eigene\\";
     //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\";
-    //char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
-    char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/Eigene/";
+    char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
+    //char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/Eigene/";
 
     // Eigene
-    char* filename = "Black_Square_256.bmp";
+    //char* filename = "Black_Square_256.bmp";
     //char* filename = "RGB_White_Black_256.bmp";
     //char* filename = "Black_Square_256_RLE.bmp";
     //char* filename = "RGB_White_Black_256_RLE.bmp";
@@ -49,14 +49,14 @@ int main(void) {
     //char* filename = "RGB_White_Black.bmp";
     //char* filename = "Black_Square_asym.bmp";
     //char* filename = "Black_Square_asym_256.bmp";
-    //char* filename = "Black_Square_asym_256_RLE.bmp";
+    //char* filename = "Black_Square_asym_256_RLE.bmp"; // ?!
 
     // TestBilder
     //char* filename = "amrandrle.bmp";
     //char* filename = "amrandrle_NO_BLUE_LINES.bmp";
     //char* filename = "amrandrleMod.bmp"; //FAILS (index out of bounds)
     //char* filename = "anderegroesse.bmp";
-    //char* filename = "aufgabe3_bild1.bmp";
+    char* filename = "aufgabe3_bild1.bmp";
     //char* filename = "aufgabe3_bild2.bmp";
     //char* filename = "rotmitlochamrand.bmp";
     //char* filename = "rotmitlochrle.bmp";
@@ -69,7 +69,7 @@ int main(void) {
     // Stand 26.10. ==> 2 / 13 funktionieren
     // Stand 29.10. ==> 9 / 13 funktionieren (die beiden OOM sind nicht unsere schuld)
 
-    char filepath[100] = { 0 };
+    char filepath[200] = { 0 };
     strcat(filepath, path);
     strcat(filepath, filename);
 
@@ -167,6 +167,7 @@ int main(void) {
                 red_end.x, red_end.y);
         printf("Green from (%d | %d) to (%d | %d)\n", green_start.x, green_start.y,
                 green_end.x, green_end.y);
+
 
         char saveFilePath[100] = { 0 };
         strcat(saveFilePath, path);

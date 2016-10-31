@@ -12,6 +12,47 @@
 
 #include "ms_types.h"
 
+
+/**
+ * the size of the color table in the bitmap
+ */
+#define COLOR_TABLE_SIZE 256
+
+/**
+ * type "BM" for File Header
+ */
+#define BF_TYPE 0x4d42
+
+/**
+ * Info header Size
+ */
+#define INFO_HEADER_SIZE 40
+
+/**
+ * Bit count for 8 Bit
+ */
+#define BITMAP_8BIT 8
+
+/**
+ * Bit count for 24 Bit
+ */
+#define BITMAP_24BIT 24
+
+/**
+ * Info Header Bi Compression True
+ */
+#define COMPRESSION_RLE 1
+
+/**
+ * Info Header Bi Compression False
+ */
+#define COMPRESSION_NONE 0
+
+/**
+ * size of WORD for aligning in RLE absolute mode
+ */
+#define WORD_SIZE 4
+
 /**
  * @brief The file header of the bitmap
  */

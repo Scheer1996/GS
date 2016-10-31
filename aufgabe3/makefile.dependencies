@@ -1,5 +1,6 @@
 main.o: main.c input.h bitmap_types.h ms_types.h output.h my_vla.h \
- errors.h
+  errors.h
 input.o: input.c input.h bitmap_types.h ms_types.h errors.h my_vla.h
-output.o: output.c output.h bitmap_types.h ms_types.h errors.h
+output.o: output.c errors.h my_vla.h bitmap_types.h ms_types.h output.h
 my_vla.o: my_vla.c my_vla.h bitmap_types.h ms_types.h errors.h
+analyze.o: analyze.c my_vla.h bitmap_types.h ms_types.h errors.h
