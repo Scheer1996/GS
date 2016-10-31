@@ -36,5 +36,15 @@
  */
 #define E_FAILED_TO_WRITE -5
 
+/**
+ * the list was null
+ */
+#define E_LIST_NULL -6
+
+/**
+ * the iteratro is in an invalid state
+ */
+#define E_INVALID_STATE -7
+
 
 #endif /* _ERRORS_H_ */

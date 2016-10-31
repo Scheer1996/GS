@@ -4,13 +4,34 @@
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
  * @date    31.10.2016
- * @brief   Analyzation of the bitmap
+ * @brief   Analization of the bitmap
  ******************************************************************
  */
 
-#ifndef AUFGABE3_ANALYZE_H_
-#define AUFGABE3_ANALYZE_H_
+#ifndef ANALYZE_H_
+#define ANALYZE_H_
 
+#include "bitmap_types.h"
 
+/**
+ * Structure for a Rectangle
+ */
+typedef struct {
+    PixelData color;
+    int x_start;
+    int x_end;
+    int y_start;
+    int y_end;
 
-#endif /* AUFGABE3_ANALYZE_H_ */
+} Rectangle;
+
+/**
+ * @brief Analizes the Bitmap
+ *
+ * @param[in] bm the Bitmap to analyse
+ * @return error code
+ * @retval 0 no error
+ */
+int analyse_bitmap(Bitmap *bm);
+
+#endif /* ANALYZE_H_ */
