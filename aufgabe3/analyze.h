@@ -32,6 +32,6 @@ typedef struct {
  * @return error code
  * @retval 0 no error
  */
-int analyse_bitmap(Bitmap *bm);
+int analyze_bitmap(Bitmap *bm);
 
 #endif /* ANALYZE_H_ */

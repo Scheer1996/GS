@@ -39,7 +39,7 @@ static bool equal(PixelData p1, PixelData p2) {
 /*
  * Analizes the Bitmap
  */
-int analyse_bitmap(Bitmap *bm) {
+int analyze_bitmap(Bitmap *bm) {
     // create 2 lists
     List rectangles;
     List *pRects = &rectangles;
