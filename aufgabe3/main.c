@@ -15,15 +15,12 @@
 #include "output.h"
 #include "my_vla.h"
 #include "errors.h"
+#include "analyze.h"
 
 /*
  * I want Pixeldata output
  */
 #define DEBUG_PRINT_PIXELDATA 0
-
-static bool equal(PixelData p1, PixelData p2) {
-    return p1.red == p2.red && p1.green == p2.green && p1.blue == p2.blue;
-}
 
 /**
  * program entry
@@ -36,8 +33,9 @@ int main(void) {
 
     //char* path = "C:\\Users\\abz254\\Downloads\\testBilder\\Eigene\\";
     //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\Eigene\\";
-    //char* path = "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\";
-    char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
+    char* path =
+            "C:\\Users\\Moritz\\Dropbox\\Philip Scheer\\GS\\Aufgabe 3\\testBilder\\";
+    //char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/";
     //char* path = "/Users/Philip/Dropbox/Studium/Moritz Höwer/GS/Aufgabe 3/testBilder/Eigene/";
 
     // Eigene
@@ -59,7 +57,7 @@ int main(void) {
     //char* filename = "aufgabe3_bild1.bmp";
     //char* filename = "aufgabe3_bild2.bmp";
     //char* filename = "rotmitlochamrand.bmp";
-    //char* filename = "rotmitlochrle.bmp";
+    char* filename = "rotmitlochrle.bmp";
     //char* filename = "rotmitlochrlemod1.bmp"; // FAILS (index out of bounds)
     //char* filename = "rotmitlochrlemod2.bmp";
     //char* filename = "rotmitlochrlemod3.bmp"; // FAILS (width is 50.331.776 and malloc fails)
@@ -207,6 +205,7 @@ int main(void) {
 				printf("\n");
 #endif
 			}
+			analyze_bitmap(&bm);
 
 			//free(bm.imageData.data);
 			// Red from 56/110 to 280/249
@@ -244,5 +243,5 @@ int main(void) {
 		}
 	}
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
