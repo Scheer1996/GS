@@ -49,9 +49,9 @@ int analyze_bitmap(Bitmap *bm) {
     list_init(pPot_rects);
 
     bool is_red = false;
+    bool is_green = false;
     Rectangle rect;
     for (int y = 0; y < bm->imageData.height; y++) {
-        bool had_red = false;
         for (int x = 0; x < bm->imageData.width; x++) {
             PixelData p;
             if (vla_get(x, y, &bm->imageData, &p) != 0) {
@@ -61,13 +61,11 @@ int analyze_bitmap(Bitmap *bm) {
 
             // find Red rectangles
             if (equal(p, RED) && !is_red) {
-                had_red = true;
                 is_red = true;
                 rect.color = RED;
                 rect.x_start = x;
                 rect.y_start = y;
-            }
-            if (is_red && !equal(p, RED)) {
+            } else if (is_red && !equal(p, RED)) {
                 is_red = false;
                 rect.x_end = x - 1;
                 rect.y_end = y;
@@ -104,25 +102,54 @@ int analyze_bitmap(Bitmap *bm) {
                 }
             }
 
-        }
-        if (!had_red) {
-            // finish all pending red rectangles
-            Iterator it = list_get_iterator(pPot_rects);
-            Rectangle r;
-            while (iterator_has_next(&it)) {
-                iterator_next(&it, &r);
-                if (equal(r.color, RED)) {
-                    if (r.y_end - r.y_start >= MIN_SIZE) {
-                        // rectangle is big enough to count
-                        list_append(pRects, r);
+            // find Green rectangles
+            if (equal(p, GREEN) && !is_green) {
+                is_green = true;
+                rect.color = GREEN;
+                rect.x_start = x;
+                rect.y_start = y;
+            } else if (is_green && !equal(p, GREEN)) {
+                is_green = false;
+                rect.x_end = x - 1;
+                rect.y_end = y;
+                if (rect.x_end - rect.x_start >= MIN_SIZE) {
+                    // the rectangle is big enough to count
+                    // check potential rects:
+                    Iterator it = list_get_iterator(pPot_rects);
+                    Rectangle r;
+                    bool already_there = false;
+                    while (iterator_has_next(&it)) {
+                        iterator_next(&it, &r);
+                        if (equal(r.color, rect.color)
+                                && r.x_start == rect.x_start
+                                && r.x_end == rect.x_end) {
+                            // element is present, update y_end
+                            already_there = true;
+                            r.y_end = y;
+                            iterator_update(&it, r);
+                            break;
+                        } else {
+                            if (r.y_end != y && r.x_start < x - 1) {
+                                // the rectangle has passed
+                                if (r.y_end - r.y_start >= MIN_SIZE) {
+                                    // rectangle is big enough to count
+                                    list_append(pRects, r);
+                                }
+                                iterator_remove(&it);
+                            }
+                        }
                     }
-                    iterator_remove(&it);
+                    if (!already_there) {
+                        list_append(pPot_rects, rect);
+                    }
                 }
+
             }
         }
         if (is_red) {
             is_red = false;
             rect.x_end = bm->imageData.width - 1;
+            rect.y_end = y;
             if (rect.x_end - rect.x_start >= MIN_SIZE) {
                 // the rectangle is big enough to count
                 // check potential rects:
@@ -133,8 +160,55 @@ int analyze_bitmap(Bitmap *bm) {
                     iterator_next(&it, &r);
                     if (equal(r.color, rect.color) && r.x_start == rect.x_start
                             && r.x_end == rect.x_end) {
+                        // element is present, update y_end
                         already_there = true;
+                        r.y_end = y;
+                        iterator_update(&it, r);
                         break;
+                    } else {
+                        if (r.y_end != y) {
+                            // the rectangle has passed
+                            if (r.y_end - r.y_start >= MIN_SIZE) {
+                                // rectangle is big enough to count
+                                list_append(pRects, r);
+                            }
+                            iterator_remove(&it);
+                        }
+                    }
+                }
+                if (!already_there) {
+                    list_append(pPot_rects, rect);
+                }
+            }
+        }
+        if (is_green) {
+            is_green = false;
+            rect.x_end = bm->imageData.width - 1;
+            rect.y_end = y;
+            if (rect.x_end - rect.x_start >= MIN_SIZE) {
+                // the rectangle is big enough to count
+                // check potential rects:
+                Iterator it = list_get_iterator(pPot_rects);
+                Rectangle r;
+                bool already_there = false;
+                while (iterator_has_next(&it)) {
+                    iterator_next(&it, &r);
+                    if (equal(r.color, rect.color) && r.x_start == rect.x_start
+                            && r.x_end == rect.x_end) {
+                        // element is present, update y_end
+                        already_there = true;
+                        r.y_end = y;
+                        iterator_update(&it, r);
+                        break;
+                    } else {
+                        if (r.y_end != y) {
+                            // the rectangle has passed
+                            if (r.y_end - r.y_start >= MIN_SIZE) {
+                                // rectangle is big enough to count
+                                list_append(pRects, r);
+                            }
+                            iterator_remove(&it);
+                        }
                     }
                 }
                 if (!already_there) {
@@ -143,9 +217,19 @@ int analyze_bitmap(Bitmap *bm) {
             }
         }
     }
-
-    Iterator it = list_get_iterator(pRects);
+    // finish all pending rectangles
+    Iterator it = list_get_iterator(pPot_rects);
     Rectangle r;
+    while (iterator_has_next(&it)) {
+        iterator_next(&it, &r);
+        if (r.y_end - r.y_start >= MIN_SIZE) {
+            // rectangle is big enough to count
+            list_append(pRects, r);
+        }
+        iterator_remove(&it);
+    }
+
+    it = list_get_iterator(pRects);
     while (iterator_has_next(&it)) {
         iterator_next(&it, &r);
         char* color = equal(r.color, RED) ? "RED" : "GREEN";

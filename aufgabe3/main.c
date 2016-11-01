@@ -67,7 +67,6 @@ int main(void) {
     // Stand 29.10. ==> 9 / 13 funktionieren (die beiden OOM sind nicht unsere schuld)
 
     //superloop
-    printf("What?");
     while(1)
     {
     	printf("Please select a File:\n");
@@ -113,7 +112,7 @@ int main(void) {
     		case 13: filename = "rotmitlochrleundpunkt.bmp";
     			break;
 
-    		otherwise: filename = "amrandrle.bmp";
+    		default: return EXIT_SUCCESS;
     	}
 
 		char filepath[200] = { 0 };
@@ -146,9 +145,10 @@ int main(void) {
 			printf("Analyse:\n");
 			analyze_bitmap(&bm);
 
-			char saveFilePath[100] = { 0 };
+			char saveFilePath[200] = { 0 };
 			strcat(saveFilePath, path);
-			strcat(saveFilePath, "testSpeichern.bmp");
+			strcat(saveFilePath, "saved_");
+            strcat(saveFilePath, filename);
 
 			res = output_write_file(saveFilePath, &bm);
 
@@ -175,6 +175,8 @@ int main(void) {
 			}
 
 		}
+
+		printf("\n--------------------------------------------------------\n\n");
 	}
 
     return EXIT_SUCCESS;
