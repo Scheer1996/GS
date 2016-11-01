@@ -56,7 +56,7 @@ int main(void) {
     //char* filename = "amrandrle_NO_BLUE_LINES.bmp";
     //char* filename = "amrandrleMod.bmp"; //FAILS (index out of bounds)
     //char* filename = "anderegroesse.bmp";
-    char* filename = "aufgabe3_bild1.bmp";
+    //char* filename = "aufgabe3_bild1.bmp";
     //char* filename = "aufgabe3_bild2.bmp";
     //char* filename = "rotmitlochamrand.bmp";
     //char* filename = "rotmitlochrle.bmp";
@@ -69,129 +69,180 @@ int main(void) {
     // Stand 26.10. ==> 2 / 13 funktionieren
     // Stand 29.10. ==> 9 / 13 funktionieren (die beiden OOM sind nicht unsere schuld)
 
-    char filepath[200] = { 0 };
-    strcat(filepath, path);
-    strcat(filepath, filename);
+    //superloop
+    while(1)
+    {
+    	printf("Please select a File:\n");
+    	printf("[1] amrandrle.bmp              [2] amrandrle_NO_BLUE_LINES.bmp \n");
+    	printf("[3] amrandrleMod.bmp           [4] anderegroesse.bmp \n");
+    	printf("[5] aufgabe3_bild1.bmp         [6] aufgabe3_bild2.bmp \n");
+    	printf("[7] rotmitlochamrand.bmp       [8] rotmitlochrle.bmp \n");
+    	printf("[9] rotmitlochrlemod1.bmp      [10] rotmitlochrlemod2.bmp \n");
+    	printf("[11] rotmitlochrlemod3.bmp     [12] rotmitlochrlemod4.bmp \n");
+    	printf("[13] rotmitlochrleundpunkt.bmp \n");
 
-    res = input_read_file(filepath, &bm);
+    	printf("File with Index: ");
+    	int menuIndex;
+    	scanf("%i", &menuIndex);
+    	fflush(stdin);
+    	char * filename;
 
-    printf("W=%d, H=%d\n", bm.infoHeader.biWidth, bm.infoHeader.biHeight);
-    printf("Mode=%d, Compression=%d\n", bm.infoHeader.biBitCount,
-            bm.infoHeader.biCompression);
+    	switch(menuIndex) {
+    		case 1: filename = "amrandrle.bmp";
+    			break;
+    		case 2: filename = "amrandrle_NO_BLUE_LINES.bmp";
+    			break;
+    		case 3: filename = "amrandrleMod.bmp";
+    			break;
+    		case 4: filename = "anderegroesse.bmp";
+    			break;
+    		case 5: filename = "aufgabe3_bild1.bmp";
+    			break;
+    		case 6: filename = "aufgabe3_bild2.bmp";
+    			break;
+    		case 7: filename = "rotmitlochamrand.bmp";
+    			break;
+    		case 8: filename = "rotmitlochrle.bmp";
+    			break;
+    		case 9: filename = "rotmitlochrlemod1.bmp";
+    			break;
+    		case 10: filename = "rotmitlochrlemod2.bmp";
+    			break;
+    		case 11: filename = "rotmitlochrlemod3.bmp";
+    			break;
+    		case 12: filename = "rotmitlochrlemod4.bmp";
+    			break;
+    		case 13: filename = "rotmitlochrleundpunkt.bmp";
+    			break;
 
-    if (res == 0) {
-        printf("\nPixel Data\n");
+    		otherwise: filename = "amrandrle.bmp";
+    	}
 
-        int red = 0;
-        int green = 0;
+		char filepath[200] = { 0 };
+		strcat(filepath, path);
+		strcat(filepath, filename);
 
-        typedef struct {
-            int x;
-            int y;
-        } pos;
+		res = input_read_file(filepath, &bm);
 
-        bool firstRed = true;
-        pos red_start;
-        pos red_end;
+		printf("W=%d, H=%d\n", bm.infoHeader.biWidth, bm.infoHeader.biHeight);
+		printf("Mode=%d, Compression=%d\n", bm.infoHeader.biBitCount,
+				bm.infoHeader.biCompression);
 
-        bool firstGreen = true;
-        pos green_start;
-        pos green_end;
+		if (res == 0) {
+			printf("\nPixel Data\n");
 
-        PixelData RED = { 0, 0, 255 };
-        PixelData GREEN = { 0, 255, 0 };
-        PixelData BLUE = { 255, 0, 0 };
-        PixelData WHITE = { 255, 255, 255 };
-        PixelData BLACK = { 0, 0, 0 };
+			int red = 0;
+			int green = 0;
 
-        for (int y = 0; y < bm.imageData.height; y++) {
-            for (int x = 0; x < bm.imageData.width; x++) {
-                PixelData p;
-                if (vla_get(x, y, &bm.imageData, &p) != 0) {
-                    printf("Oh Oh, gaaaanz schlecht\n");
-                    break;
-                }
+			typedef struct {
+				int x;
+				int y;
+			} pos;
+
+			bool firstRed = true;
+			pos red_start;
+			pos red_end;
+
+			bool firstGreen = true;
+			pos green_start;
+			pos green_end;
+
+			PixelData RED = { 0, 0, 255 };
+			PixelData GREEN = { 0, 255, 0 };
+			PixelData BLUE = { 255, 0, 0 };
+			PixelData WHITE = { 255, 255, 255 };
+			PixelData BLACK = { 0, 0, 0 };
+
+			for (int y = 0; y < bm.imageData.height; y++) {
+				for (int x = 0; x < bm.imageData.width; x++) {
+					PixelData p;
+					if (vla_get(x, y, &bm.imageData, &p) != 0) {
+						printf("Oh Oh, gaaaanz schlecht\n");
+						break;
+					}
 #if DEBUG_PRINT_PIXELDATA
-                printf("(%3d %3d %3d)", p.red, p.green, p.blue);
+					printf("(%3d %3d %3d)", p.red, p.green, p.blue);
 #endif
 
-                if (!red && equal(p, RED)) {
-                    red = 1;
-                    if (firstRed) {
-                        firstRed = false;
-                        red_start.x = x;
-                        red_start.y = y;
-                    }
-                } else if (red && !equal(p, RED)) {
-                    red = 0;
-                    if (x == 0) {
-                        red_end.x = bm.imageData.width;
-                        red_end.y = y - 1;
-                    } else {
-                        red_end.x = x - 1;
-                        red_end.y = y;
-                    }
-                }
+					if (!red && equal(p, RED)) {
+						red = 1;
+						if (firstRed) {
+							firstRed = false;
+							red_start.x = x;
+							red_start.y = y;
+						}
+					} else if (red && !equal(p, RED)) {
+						red = 0;
+						if (x == 0) {
+							red_end.x = bm.imageData.width;
+							red_end.y = y - 1;
+						} else {
+							red_end.x = x - 1;
+							red_end.y = y;
+						}
+					}
 
-
-                /**
-                 * das selbe in Grün hahahaha
-                 */
-                if (!green && equal(p, GREEN)) {
-                    green = 1;
-                    if (firstGreen) {
-                        firstGreen = false;
-                        green_start.x = x;
-                        green_start.y = y;
-                    }
-                } else if (green && !equal(p, GREEN)) {
-                	green = 0;
-                    if (x == 0) {
-                    	green_end.x = bm.imageData.width;
-                        green_end.y = y - 1;
-                    } else {
-                    	green_end.x = x - 1;
-                        green_end.y = y;
-                    }
-                }
-            }
+					/**
+					 * das selbe in Grün hahahaha
+					 */
+					if (!green && equal(p, GREEN)) {
+						green = 1;
+						if (firstGreen) {
+							firstGreen = false;
+							green_start.x = x;
+							green_start.y = y;
+						}
+					} else if (green && !equal(p, GREEN)) {
+						green = 0;
+						if (x == 0) {
+							green_end.x = bm.imageData.width;
+							green_end.y = y - 1;
+						} else {
+							green_end.x = x - 1;
+							green_end.y = y;
+						}
+					}
+				}
 #if DEBUG_PRINT_PIXELDATA
-            printf("\n");
+				printf("\n");
 #endif
-        }
+			}
 
-        //free(bm.imageData.data);
-        // Red from 56/110 to 280/249
-        // Green from 302/192 to 566/436
-        printf("Red from (%d | %d) to (%d | %d)\n", red_start.x, red_start.y,
-                red_end.x, red_end.y);
-        printf("Green from (%d | %d) to (%d | %d)\n", green_start.x, green_start.y,
-                green_end.x, green_end.y);
+			//free(bm.imageData.data);
+			// Red from 56/110 to 280/249
+			// Green from 302/192 to 566/436
+			printf("Red from (%d | %d) to (%d | %d)\n", red_start.x,
+					red_start.y, red_end.x, red_end.y);
+			printf("Green from (%d | %d) to (%d | %d)\n", green_start.x,
+					green_start.y, green_end.x, green_end.y);
 
+			char saveFilePath[100] = { 0 };
+			strcat(saveFilePath, path);
+			strcat(saveFilePath, "testSpeichern.bmp");
 
-        char saveFilePath[100] = { 0 };
-        strcat(saveFilePath, path);
-        strcat(saveFilePath, "testSpeichern.bmp");
+			res = output_write_file(saveFilePath, &bm);
 
-        res = output_write_file(saveFilePath, &bm);
+			if(res == E_FAILED_TO_WRITE) {
+				printf("Failed to Write");
+			} else if (res == E_INDEX_OUT_OF_BOUNDS) {
+				printf("Index out of Bounds");
+			}
+		} else {
+			if (res == E_BAD_BITMAP) {
+				printf("Bad Bitmap");
+			} else if (res == E_FAILED_TO_READ) {
+				printf("Failed to Read");
+				perror("Deswegen");
+			} else if (res == E_INDEX_OUT_OF_BOUNDS) {
+				printf("Index out of Bounds");
+			} else if (res == E_NO_MEMORY) {
+				printf("Out of memory");
+			} else {
+				printf("Irgendein Fehler");
+			}
 
-    } else {
-        if (res == E_BAD_BITMAP) {
-            printf("Bad Bitmap");
-        } else if (res == E_FAILED_TO_READ) {
-            printf("Failed to Read");
-            perror("Deswegen");
-        } else if (res == E_INDEX_OUT_OF_BOUNDS) {
-            printf("Index out of Bounds");
-        } else if (res == E_NO_MEMORY) {
-            printf("Out of memory");
-        } else if (res == E_FAILED_TO_WRITE) {
-            printf("Failed to Write");
-        } else {
-            printf("Irgendein Fehler");
-        }
+		}
+	}
 
-    }
-
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

@@ -28,17 +28,20 @@ int output_write_file(char* path, Bitmap* bitmap) {
 	}
 	VLA* image_data = &bitmap->imageData;
 
+	//adjust fileHeader
 	bitmap->fileHeader.bfOffBits = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader);
 	bitmap->fileHeader.bfSize = bitmap->fileHeader.bfOffBits + sizeof(PixelData) * image_data->width * image_data->height;
 
+	//adjust InfoHeader
 	bitmap->infoHeader.biBitCount = BITMAP_24BIT;
 	bitmap->infoHeader.biCompression = COMPRESSION_NONE;
 
 
+	//write fileHeader & infoHeader
 	fwrite(&bitmap->fileHeader, sizeof(bitmap->fileHeader), 1, save);
 	fwrite(&bitmap->infoHeader, sizeof(bitmap->infoHeader), 1, save);
 
-    // Readout VLA
+    // Readout VLA and write pixelData to file
 	for (int y = image_data->height - 1; y >= 0; y--) {
         for (int x = 0; x < image_data->width; x++) {
             PixelData p;
