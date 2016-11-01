@@ -51,7 +51,7 @@
 /**
  * size of WORD for aligning in RLE absolute mode
  */
-#define WORD_SIZE 4
+#define WORD_SIZE 2
 
 /**
  * @brief The file header of the bitmap

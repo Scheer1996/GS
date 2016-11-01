@@ -14,7 +14,6 @@
 #include "my_vla.h"
 #include <stdbool.h>
 
-
 /*
  * I want debug messages
  */
@@ -59,7 +58,7 @@ static ColorTableEntry* read_color_table(FILE* file) {
     size_t readSize;
 
     ColorTableEntry *colorTable = (ColorTableEntry*) calloc(
-    COLOR_TABLE_SIZE, sizeof(ColorTableEntry));
+            COLOR_TABLE_SIZE, sizeof(ColorTableEntry));
     if (colorTable == NULL) {
         return NULL;
     }
