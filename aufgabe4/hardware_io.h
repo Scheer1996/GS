@@ -10,49 +10,14 @@
 #ifndef HARDWARE_IO_H
 #define HARDWARE_IO_H
 
-#include <stdbool.h>
-#include "rotary_encoder.h"
+void hwio_set_pin_opendrain(int pin);
 
-/**
- * @brief Reads channel A from encoder
- *
- * @retval true channel is high
- * @retval false channel is low
- */
-bool hwio_get_encoder_channel_A(void);
+void hwio_set_pin_pushpull(int pin);
 
-/**
- * @brief Reads channel B from encoder
-*
- * @retval true channel is high
- * @retval false channel is low
- */
-bool hwio_get_encoder_channel_B(void);
+void hwio_set_pin_low(int pin);
 
-/**
- * @brief Displays data on LEDs
- *
- * @param[in] number an 8 bit number to be displayed on LEDS D21-D28
- * @param[in] dir displays the direction on LEDS D20 / D19
- */
-void hwio_display_data(char number, Direction dir);
+void hwio_set_pin_high(int pin);
 
-
-/**
- * @brief Displays an error by illuminating D18
- */
-void hwio_show_error(void);
-
-/**
- * @brief Clears the error LED D18
- */
-void hwio_clear_error(void);
-
-/**
- * @brief Checks reset switches S7 and S6
- * 
- * @return true when either is pressed
- */
-bool hwio_is_reset_pressed(void);
+int hwio_get_pin(int pin);
 
 #endif /* HARDWARE_IO_H */

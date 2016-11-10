@@ -1,16 +1,11 @@
 /** ****************************************************************
- * @file    aufgabe4/errors.h
+ * @file    aufgabe4/sensor.c
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    06.11.2016
- * @brief   Header for the error codes
+ * @date    10.11.2016
+ * @brief   Implementation of the Sensor module
  ******************************************************************
  */
 
-#ifndef ERRORS_H
-#define ERRORS_H
-
-
-
-#endif /* ERRORS_H */
+#include "sensor.h"
