@@ -10,10 +10,14 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
+#include <stdint.h>
+
 // Board 701/2
-#define S1 0xE6713028
-#define S2 0xE67FE228
-#define S3 0xE66E8E28
-#define S4 0xE676AC28
+#define S1 0xB8000001e6713028
+#define S2 0xB0000001e67fe228
+#define S3 0xBF000001e66e8e28
+#define S4 0x25000001e676ac28
+
+int sensor_measure(uint64_t romcode, double *temp);
 
 #endif /* SENSOR_H */

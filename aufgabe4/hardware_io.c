@@ -39,6 +39,7 @@ void hwio_set_pin_opendrain(int pin){
 }
 
 void hwio_set_pin_pushpull(int pin){
+    PORT->OTYPER &= ~MASK_ONE_BIT_PIN(pin);
 }
 
 void hwio_set_pin_low(int pin){

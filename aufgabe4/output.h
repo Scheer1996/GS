@@ -10,11 +10,17 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
+#include <stdint.h>
+
 /**
  * @brief Initializes the output (writing explanatory text)
  */
 void output_init(void);
 
-void output_display_number(unsigned long long number);
+void output_display_romcode(uint64_t romcode);
+
+void output_display_error(char *message);
+
+void output_display_temp(double temp);
 
 #endif /* _OUTPUT_H */

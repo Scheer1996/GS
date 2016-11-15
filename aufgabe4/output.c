@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "tft.h"
 #include "output.h"
+#include "config.h"
 
 #define BUFFER_SIZE 40
 
@@ -43,18 +44,40 @@ void output_update_data(double angle, double speed) {
  ******************************************************************
  */
 void output_init() {
+    TFT_cursor_off();
+    
+#if MODE == READ_SINGLE_ROM
     TFT_gotoxy(TEXT_X, LINE_1_Y);
-    TFT_puts("Winkel:                       ");
-
-    TFT_gotoxy(TEXT_X, LINE_2_Y);
-    TFT_puts("Geschwindigkeit:        Grad/s");
+    TFT_puts("Modus: Lesen des ROM");
+#elif MODE == MEASURE_TEMP
+    TFT_gotoxy(TEXT_X, LINE_1_Y);
+    TFT_puts("Modus: Temperaturmessung (einzeln)");
+#endif
 }
 
-void output_display_number(unsigned long long number){
-	char buffer[BUFFER_SIZE + 1] = { 0 };
-
-    // write angle to string
-    sprintf(buffer, "%x", number);
-    TFT_gotoxy(DATA_X, LINE_1_Y);
+void output_display_romcode(uint64_t romcode){
+    char buffer[BUFFER_SIZE + 1] = { 0 };
+    sprintf(buffer, "Romcode: %llx", romcode);
+    
+    TFT_gotoxy(TEXT_X, LINE_2_Y);
     TFT_puts(buffer);
+}
+
+void output_display_temp(double temp){
+    char buffer[BUFFER_SIZE + 1] = { 0 };
+    sprintf(buffer, "Temperatur: %.2f", temp);
+    
+    TFT_gotoxy(TEXT_X, LINE_2_Y);
+    TFT_puts(buffer);
+    for(int i = strlen(buffer); i < BUFFER_SIZE; i++){
+        TFT_putc(' ');
+    }
+}
+
+void output_display_error(char *message){
+    TFT_gotoxy(TEXT_X, LINE_2_Y);
+    TFT_puts(message);
+    for(int i = strlen(message); i < BUFFER_SIZE; i++){
+        TFT_putc(' ');
+    }
 }
