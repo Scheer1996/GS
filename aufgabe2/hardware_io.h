@@ -8,7 +8,7 @@
  ******************************************************************
  */
 #ifndef HARDWARE_IO_H
-#define HARDWARE_IO_H
+#define HAL_H
 
 #include <stdbool.h>
 #include "rotary_encoder.h"

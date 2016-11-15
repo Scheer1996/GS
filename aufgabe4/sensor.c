@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    10.11.2016
+ * @date    15.11.2016
  * @brief   Implementation of the Sensor module
  ******************************************************************
  */
@@ -15,10 +15,22 @@
 #define SCRATCHPAD_SATA_SIZE 8
 #define TEMP_RESOLUTION 0.0625
 
+/**
+ * @brief Reads and converts the temperature from the scratchpad
+ *
+ * @param[out] temp pointer, to where temperature will be stored
+ * @return error code
+ * @retval 0 no error
+ * @retval E_CRC_FAILED crc checksum failed
+ */
 static int read_temp_from_scratchpad(double *temp){
     uint64_t data = 0;
     BYTE crc = 0;
     BYTE b = 0;
+
+    // maybe easier with pointer arithmetics?
+    // BYTE *b = (BYTE *)romcode
+    // bus_read_byte(b + i);
         
     // read data
     for(int i = 0; i < SCRATCHPAD_SATA_SIZE; i++){
@@ -36,6 +48,9 @@ static int read_temp_from_scratchpad(double *temp){
     return 0;
 }
 
+/*
+ * measure data
+ */
 int sensor_measure(uint64_t romcode, double *temp){
     if(bus_reset()){
         bus_send_command(BUS_MATCH_ROM_CMD);

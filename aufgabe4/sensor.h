@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    10.11.2016
+ * @date    15.11.2016
  * @brief   Header for the Sensor module
  ******************************************************************
  */
@@ -18,6 +18,15 @@
 #define S3 0xBF000001e66e8e28
 #define S4 0x25000001e676ac28
 
+/**
+ * @brief Mesasure and read temperature with a sensor
+ *
+ * @param[in] romcode the romcode for addressing a sensor
+ * @param[out] temp pointer to where to store the temperature in degrees celsius
+ * @return error code
+ * @retval 0           no error
+ * @retval E_NO_SENSOR there is no sensor connected
+ */
 int sensor_measure(uint64_t romcode, double *temp);
 
 #endif /* SENSOR_H */

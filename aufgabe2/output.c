@@ -14,7 +14,7 @@
 
 #define BUFFER_SIZE 40
 
-#define TEXT_X 2
+#define START_X 2
 #define DATA_X 19
 
 #define LINE_1_Y 2
@@ -43,9 +43,9 @@ void output_update_data(double angle, double speed) {
  ******************************************************************
  */
 void output_init() {
-    TFT_gotoxy(TEXT_X, LINE_1_Y);
+    TFT_gotoxy(START_X, LINE_1_Y);
     TFT_puts("Winkel:                 Grad");
 
-    TFT_gotoxy(TEXT_X, LINE_2_Y);
+    TFT_gotoxy(START_X, LINE_2_Y);
     TFT_puts("Geschwindigkeit:        Grad/s");
 }
