@@ -3,7 +3,7 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    14.10.2016
+ * @date    15.11.2016
  * @brief   Main module and program entry point
  ******************************************************************
  */
@@ -13,8 +13,8 @@
 #include "sensor.h"
 #include "timer.h"
 #include "TI_Lib.h"
-#include "hardware_io.h"
 #include "bus.h"
+#include "hal.h"
 #include "output.h"
 
 

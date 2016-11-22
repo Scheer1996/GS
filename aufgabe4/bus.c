@@ -3,21 +3,41 @@
  * @author  Moritz Hoewer (Moritz.Hoewer@haw-hamburg.de)
  * @author  Philip Scheer (Philip.Scheer@haw-hamburg.de)
  * @version 1.0
- * @date    10.11.2016
+ * @date    15.11.2016
  * @brief   Implementation of the Bus module
  ******************************************************************
  */
  
 #include "bus.h"
 #include "errors.h"
-#include "hardware_io.h"
+#include "hal.h"
 #include "timer.h"
 
+/**
+ * @brief The pin used for data transfer
+ */
 #define DATA_PIN 0
+
+/**
+ * @brief The pin used for providing power
+ */
 #define POWER_PIN 1
 
+/**
+ * @brief How many bytes is the romcode
+ */
 #define ROMCODE_SIZE 8
 
+/**
+ * @brief How long the bus should be in powered state
+ */
+#define POWER_ON_TIME_US 750 * 1000
+
+/**
+ * @brief Waits for the specified amount of time
+ *
+ * @param us time to wait (in microseconds)
+ */
 static void wait(int us){
 	uint32_t ts = getTimeStamp();
 	while(timerDiffToNsec(ts, getTimeStamp()) < (us * 1000)){
@@ -25,40 +45,55 @@ static void wait(int us){
 	}
 }
 
+/**
+ * @brief Sends a byte on the bus
+ *
+ * @param b the byte to send
+ */
 static void send_byte(BYTE b){
 	for(int i = 0; i < BYTE_SIZE; i++){
 		if(b & 1 << i){
 			// send 1
-			hwio_set_pin_low(DATA_PIN);
+			hal_set_pin_low(DATA_PIN);
 			wait(6);
-			hwio_set_pin_high(DATA_PIN);
+			hal_set_pin_high(DATA_PIN);
 			wait(64);
 		} else {
 			// send 0
-			hwio_set_pin_low(DATA_PIN);
+			hal_set_pin_low(DATA_PIN);
 			wait(60);
-			hwio_set_pin_high(DATA_PIN);
+			hal_set_pin_high(DATA_PIN);
 			wait(10);
 		}
 	}
 }
 
+/*
+ * Reads a byte from the bus
+ */
 void bus_read_byte(BYTE *b){
 	*b = 0;
 	for(int i = 0; i < BYTE_SIZE; i++){
-		hwio_set_pin_low(DATA_PIN);
+		hal_set_pin_low(DATA_PIN);
 		wait(6);
-		hwio_set_pin_high(DATA_PIN);
+		hal_set_pin_high(DATA_PIN);
 		wait(9);
 		// lesen
-		if(hwio_get_pin(DATA_PIN) == 1){
+		if(hal_get_pin(DATA_PIN) == 1){
 			*b |= (1 << i);
 		}
 		wait(55);
 	}	
 }
 
+/**
+ * @brief Checks CRC checksum to verify the romcode
+ *
+ * @param romcode the romcode to check
+ * @return true, if romcode is valid
+ */
 static bool check_crc(uint64_t *romcode) {
+    // lookup table for checking
     static BYTE lookup_table[] = { 0, 94, 188, 226, 97, 63, 221, 131, 194, 156,
             126, 32, 163, 253, 31, 65, 157, 195, 33, 127, 252, 162, 64, 30, 95,
             1, 227, 189, 62, 96, 130, 220, 35, 125, 159, 193, 66, 28, 254, 160,
@@ -82,49 +117,73 @@ static bool check_crc(uint64_t *romcode) {
     for(int i = 0; i < ROMCODE_SIZE; i++){
         BYTE input = (BYTE)(*romcode >> (i * BYTE_SIZE));
         crc = lookup_table[crc ^ input];
-    }   
+    }
+    // romcode is valid if crc is now 0
     return crc == 0;
 }
 
-
+/*
+ * initializes the bus
+ */
 void bus_init(){
-	hwio_set_pin_opendrain(DATA_PIN);
-	hwio_set_pin_high(DATA_PIN);
+    // initialize input pin
+	hal_set_pin_opendrain(DATA_PIN);
+	hal_set_pin_high(DATA_PIN);
     
-    hwio_set_pin_opendrain(POWER_PIN);
-    hwio_set_pin_high(POWER_PIN);
+	// initialize output pin
+    hal_set_pin_opendrain(POWER_PIN);
+    hal_set_pin_high(POWER_PIN);
     
+    // initialize timer
 	initTimer();
 }
 
+/*
+ * resets the bus
+ */
 bool bus_reset(){
     bool there = false;
-	hwio_set_pin_opendrain(DATA_PIN);
+	hal_set_pin_opendrain(DATA_PIN);
 	
-	hwio_set_pin_low(DATA_PIN);
+	hal_set_pin_low(DATA_PIN);
 	wait(480);
-	hwio_set_pin_high(DATA_PIN);
+	hal_set_pin_high(DATA_PIN);
 	wait(70);
-	// abfragen
-    if(hwio_get_pin(DATA_PIN) == 0){
+
+	// check if someone's there
+    if(hal_get_pin(DATA_PIN) == 0){
         there = true;
     }
+
 	wait(410);
     return there;
 }
 
+/*
+ * send a commmand via the bus
+ */
 void bus_send_command(BYTE command){
 	send_byte(command);
 }
 
+/*
+ * send a romcode via the bus
+ */
 void bus_send_romcode(uint64_t romcode){
     for(int i = 0; i < ROMCODE_SIZE; i++){
         send_byte((BYTE)(romcode >> (i * BYTE_SIZE)));
     }
 }
 
+/*
+ * read a romcode from the bus
+ */
 int bus_read_romcode(uint64_t *romcode){
 	*romcode = 0;
+
+	// maybe easier with pointer arithmetics?
+	// BYTE *b = (BYTE *)romcode
+	// bus_read_byte(b + i);
 	for(int i = 0; i < ROMCODE_SIZE; i++){
 		BYTE b;
 		bus_read_byte(&b);
@@ -140,12 +199,21 @@ int bus_read_romcode(uint64_t *romcode){
     }
 }
 
+/*
+ * use bus to provide parasite power to the sensor
+ */
 void bus_provide_power(){
-    hwio_set_pin_pushpull(DATA_PIN);
-    hwio_set_pin_pushpull(POWER_PIN);
-    hwio_set_pin_high(POWER_PIN);
-    hwio_set_pin_high(DATA_PIN);
+    // enable push-pull mode
+    hal_set_pin_pushpull(POWER_PIN);
+	hal_set_pin_pushpull(DATA_PIN);
+
+    // turn on the pins
+    hal_set_pin_high(DATA_PIN);
+    hal_set_pin_high(POWER_PIN);
+
     wait(750 * 1000);
-    hwio_set_pin_opendrain(POWER_PIN);
-    hwio_set_pin_low(DATA_PIN);
+
+    // back to safety (open-drain)
+    hal_set_pin_opendrain(POWER_PIN);
+	hal_set_pin_opendrain(DATA_PIN);
 }
