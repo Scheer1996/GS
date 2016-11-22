@@ -52,6 +52,11 @@ int main(void) {
             output_display_temp(temp);
         }
     }
+#elif MODE == AUTO_MODE
+    while(1) {
+        
+        
+    }
 #else
     while (1) {
         

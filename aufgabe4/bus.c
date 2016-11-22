@@ -141,9 +141,11 @@ int bus_read_romcode(uint64_t *romcode){
 }
 
 void bus_provide_power(){
+    hwio_set_pin_pushpull(DATA_PIN);
     hwio_set_pin_pushpull(POWER_PIN);
     hwio_set_pin_high(POWER_PIN);
     hwio_set_pin_high(DATA_PIN);
     wait(750 * 1000);
     hwio_set_pin_opendrain(POWER_PIN);
+    hwio_set_pin_low(DATA_PIN);
 }

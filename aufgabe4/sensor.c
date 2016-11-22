@@ -56,3 +56,23 @@ int sensor_measure(uint64_t romcode, double *temp){
         return E_NO_SENSOR;
     }
 }
+
+
+
+int sensor_search(){
+    
+    //rekursiv durchgehen
+    /*
+    2 Parameter
+    Scan Tiefe
+    bestehenden 64 bit Romcode
+    
+    
+    2. hilfsmethode für fall das beide zweige gescannt werden müssen - 00
+    setz System auf höhe der verzweiggung, startet Suche danach wieder
+    
+    
+    */
+    
+    
+}

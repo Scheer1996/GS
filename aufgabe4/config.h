@@ -15,6 +15,6 @@
 #define MEASURE_TEMP 2
 #define AUTO_MODE 3
 
-#define MODE MEASURE_TEMP
+#define MODE MEASURE_TEMP 
 
 #endif /* CONFIG_H */
