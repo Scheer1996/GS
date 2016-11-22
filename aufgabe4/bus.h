@@ -11,6 +11,7 @@
 #define BUS_H
 #include <stdint.h>
 #include <stdbool.h>
+#include "list.h"
 
 typedef uint8_t BYTE;
 
@@ -44,6 +45,8 @@ typedef uint8_t BYTE;
  * @brief Ask sensor to send the contents of its scratchpad
  */
 #define BUS_READ_SCRATCHPAD_CMD 0xBE
+
+#define BUS_SEARCH_ROM_CMD 0xF0
 
 // Functions ------------------------------------------------------------------
 
@@ -94,5 +97,16 @@ int bus_read_romcode(uint64_t *romcode);
  * @brief Provide power through the bus (will prevent data transfer)
  */
 void bus_provide_power( void );
+
+List bus_search( void );
+
+/**
+ * @brief Checks CRC checksum to verify the data
+ *
+ * @param data the data to check
+ * @param crc the crc to check against
+ * @return true, if data is valid
+ */
+bool bus_check_crc(uint64_t *data, BYTE crc);
 
 #endif /* BUS_H */

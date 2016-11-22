@@ -27,10 +27,6 @@ static int read_temp_from_scratchpad(double *temp){
     uint64_t data = 0;
     BYTE crc = 0;
     BYTE b = 0;
-
-    // maybe easier with pointer arithmetics?
-    // BYTE *b = (BYTE *)romcode
-    // bus_read_byte(b + i);
         
     // read data
     for(int i = 0; i < SCRATCHPAD_SATA_SIZE; i++){
@@ -42,10 +38,13 @@ static int read_temp_from_scratchpad(double *temp){
     bus_read_byte(&crc);
     
     //CRC verify
-    
-    int16_t temp_raw = (int16_t)data;
-    *temp = temp_raw * TEMP_RESOLUTION;
-    return 0;
+    if(bus_check_crc(&data, crc)){
+        int16_t temp_raw = (int16_t)data;
+        *temp = temp_raw * TEMP_RESOLUTION;
+        return 0;
+    } else {
+        return E_CRC_FAILED;
+    }    
 }
 
 /*
@@ -62,32 +61,11 @@ int sensor_measure(uint64_t romcode, double *temp){
             bus_send_command(BUS_MATCH_ROM_CMD);
             bus_send_romcode(romcode);
             bus_send_command(BUS_READ_SCRATCHPAD_CMD);
-            read_temp_from_scratchpad(temp);
-            return 0;
+            return read_temp_from_scratchpad(temp);
         } else {
             return E_NO_SENSOR;
         }
     } else {
         return E_NO_SENSOR;
     }
-}
-
-
-
-int sensor_search(){
-    
-    //rekursiv durchgehen
-    /*
-    2 Parameter
-    Scan Tiefe
-    bestehenden 64 bit Romcode
-    
-    
-    2. hilfsmethode für fall das beide zweige gescannt werden müssen - 00
-    setz System auf höhe der verzweiggung, startet Suche danach wieder
-    
-    
-    */
-    
-    
 }

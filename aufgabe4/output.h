@@ -38,6 +38,15 @@ void output_display_romcode(uint64_t romcode);
 void output_display_error(char *message);
 
 /**
+ * @brief Display an error message
+ *
+ * Will display in line 2 + offset
+ *
+ * @param[in] message the message to print
+ */
+void output_display_error_offset(char *message, int offset);
+
+/**
  * @brief Displays a temperature on the screen
  *
  * Will display in line 2
@@ -45,5 +54,15 @@ void output_display_error(char *message);
  * @param[in] temp the temperature
  */
 void output_display_temp(double temp);
+
+/**
+ * @brief Displays a temperature on the screen
+ *
+ * Will display in line 2 + offset
+ *
+ * @param[in] temp   the temperature
+ * @param[in] offset the offset (in lines)
+ */
+void output_display_temp_offset(double temp, int offset);
 
 #endif /* _OUTPUT_H */

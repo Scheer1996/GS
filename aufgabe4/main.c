@@ -53,8 +53,22 @@ int main(void) {
         }
     }
 #elif MODE == AUTO_MODE
+    List sensors = bus_search();
     while(1) {
+        Iterator it = list_get_iterator(&sensors);
+        uint64_t id;
+        double temp;
+        int offset = 0;
         
+        while(iterator_has_next(&it)){    
+            iterator_next(&it, &id);
+            if(sensor_measure(id, &temp) == 0){
+                output_display_temp_offset(temp, offset);
+            } else {
+                output_display_error_offset("Sensor disconnected!", offset);
+            }
+            offset++;
+        }
         
     }
 #else

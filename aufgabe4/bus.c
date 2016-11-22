@@ -33,6 +33,10 @@
  */
 #define POWER_ON_TIME_US 750 * 1000
 
+#define ZERO_64BIT (uint64_t)0
+
+#define ONE_64BIT (uint64_t)1
+
 /**
  * @brief Waits for the specified amount of time
  *
@@ -45,6 +49,22 @@ static void wait(int us){
 	}
 }
 
+static void send_bit(int bit){
+    if(bit){
+        // send 1
+		hal_set_pin_low(DATA_PIN);
+		wait(6);
+		hal_set_pin_high(DATA_PIN);
+		wait(64);
+    } else {
+        // send 0
+		hal_set_pin_low(DATA_PIN);
+		wait(60);
+		hal_set_pin_high(DATA_PIN);
+		wait(10);
+    }
+}
+
 /**
  * @brief Sends a byte on the bus
  *
@@ -53,19 +73,73 @@ static void wait(int us){
 static void send_byte(BYTE b){
 	for(int i = 0; i < BYTE_SIZE; i++){
 		if(b & 1 << i){
-			// send 1
-			hal_set_pin_low(DATA_PIN);
-			wait(6);
-			hal_set_pin_high(DATA_PIN);
-			wait(64);
+			send_bit(1);
 		} else {
-			// send 0
-			hal_set_pin_low(DATA_PIN);
-			wait(60);
-			hal_set_pin_high(DATA_PIN);
-			wait(10);
+			send_bit(0);
 		}
 	}
+}
+
+static int read_bit(){
+    int result = 0;
+    hal_set_pin_low(DATA_PIN);
+	wait(6);
+	hal_set_pin_high(DATA_PIN);
+	wait(9);
+	// lesen
+	if(hal_get_pin(DATA_PIN) == 1){
+		result = 1;
+	}
+	wait(55);
+    return result;
+}
+
+static void jump_to(int current_index, uint64_t romcode){
+    bus_reset();
+    bus_send_command(BUS_SEARCH_ROM_CMD);
+    read_bit(); 
+    read_bit();
+    
+    for(int i = 0; i < current_index; i++){
+        send_bit(romcode & 1 << i);
+        read_bit(); 
+        read_bit();
+    }
+}
+
+
+static void search_recursive(List* list, int current_index, uint64_t romcode){
+    if(current_index >= 64){
+        // add sensor and quit recursion
+        list_append(list, romcode);
+        return;
+    }
+    
+    int bit, inverse;
+    bit = read_bit();
+    inverse = read_bit();
+    
+    if(bit == !inverse){
+        send_bit(bit);
+        romcode |= ((uint64_t)bit << current_index);
+        search_recursive(list, current_index + 1, romcode);        
+    } else if( bit == 0 && inverse == 0){
+        // Need to decide
+        // try 0 first
+        send_bit(0);
+        romcode |= (ZERO_64BIT << current_index);
+        search_recursive(list, current_index + 1, romcode);
+        
+        // restart from the beginning
+        jump_to(current_index, romcode);
+        
+        // try 1
+        send_bit(1);
+        romcode |= (ONE_64BIT << current_index);
+        search_recursive(list, current_index + 1, romcode);   
+    } else {
+        return;
+    }
 }
 
 /*
@@ -74,25 +148,14 @@ static void send_byte(BYTE b){
 void bus_read_byte(BYTE *b){
 	*b = 0;
 	for(int i = 0; i < BYTE_SIZE; i++){
-		hal_set_pin_low(DATA_PIN);
-		wait(6);
-		hal_set_pin_high(DATA_PIN);
-		wait(9);
-		// lesen
-		if(hal_get_pin(DATA_PIN) == 1){
-			*b |= (1 << i);
-		}
-		wait(55);
+		*b |= (read_bit() << i);
 	}	
 }
 
-/**
- * @brief Checks CRC checksum to verify the romcode
- *
- * @param romcode the romcode to check
- * @return true, if romcode is valid
+/*
+ * Checks CRC checksum to verify the data
  */
-static bool check_crc(uint64_t *romcode) {
+bool bus_check_crc(uint64_t *data, BYTE crc) {
     // lookup table for checking
     static BYTE lookup_table[] = { 0, 94, 188, 226, 97, 63, 221, 131, 194, 156,
             126, 32, 163, 253, 31, 65, 157, 195, 33, 127, 252, 162, 64, 30, 95,
@@ -113,13 +176,13 @@ static bool check_crc(uint64_t *romcode) {
             43, 117, 151, 201, 74, 20, 246, 168, 116, 42, 200, 150, 21, 75, 169,
             247, 182, 232, 10, 84, 215, 137, 107, 53 };
     
-    BYTE crc = 0;
+    BYTE test = 0;
     for(int i = 0; i < ROMCODE_SIZE; i++){
-        BYTE input = (BYTE)(*romcode >> (i * BYTE_SIZE));
-        crc = lookup_table[crc ^ input];
+        BYTE input = (BYTE)(*data >> (i * BYTE_SIZE));
+        test = lookup_table[test ^ input];
     }
-    // romcode is valid if crc is now 0
-    return crc == 0;
+    // romcode is valid if crc matches
+    return crc == test;
 }
 
 /*
@@ -181,9 +244,6 @@ void bus_send_romcode(uint64_t romcode){
 int bus_read_romcode(uint64_t *romcode){
 	*romcode = 0;
 
-	// maybe easier with pointer arithmetics?
-	// BYTE *b = (BYTE *)romcode
-	// bus_read_byte(b + i);
 	for(int i = 0; i < ROMCODE_SIZE; i++){
 		BYTE b;
 		bus_read_byte(&b);
@@ -192,7 +252,7 @@ int bus_read_romcode(uint64_t *romcode){
 	}
     
     // CRC check
-    if(check_crc(romcode)){
+    if(bus_check_crc(romcode, 0)){
         return 0;
     } else {
         return E_CRC_FAILED;
@@ -211,9 +271,20 @@ void bus_provide_power(){
     hal_set_pin_high(DATA_PIN);
     hal_set_pin_high(POWER_PIN);
 
-    wait(750 * 1000);
+    wait(POWER_ON_TIME_US);
 
     // back to safety (open-drain)
     hal_set_pin_opendrain(POWER_PIN);
 	hal_set_pin_opendrain(DATA_PIN);
+}
+
+List bus_search(){
+    List sensors;
+    list_init(&sensors);
+    
+    bus_reset();
+    bus_send_command(BUS_SEARCH_ROM_CMD);
+    search_recursive(&sensors, 0, 0);
+    
+    return sensors;
 }

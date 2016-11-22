@@ -30,6 +30,6 @@
 /**
  * @brief Switch to select which mode the software should operate in
  */
-#define MODE MEASURE_TEMP
+#define MODE AUTO_MODE
 
 #endif /* CONFIG_H */

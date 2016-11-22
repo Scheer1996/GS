@@ -28,6 +28,4 @@
  */
 int sensor_measure(uint64_t romcode, double *temp);
 
-int sensor_search();
-
 #endif /* SENSOR_H */

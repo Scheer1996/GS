@@ -47,6 +47,9 @@ void output_init() {
 #elif MODE == MEASURE_TEMP
     TFT_gotoxy(START_X, LINE_1_Y);
     TFT_puts("Modus: Temperaturmessung (einzeln)");
+#elif MODE == AUTO_MODE
+    TFT_gotoxy(START_X, LINE_1_Y);
+    TFT_puts("Modus: Automatik");
 #endif
 }
 
@@ -74,16 +77,7 @@ void output_display_romcode(uint64_t romcode) {
  * will display in line 2
  */
 void output_display_temp(double temp) {
-    char buffer[BUFFER_SIZE + 1] = { 0 };
-    sprintf(buffer, "Temperatur: %.2f °C", temp);
-
-    TFT_gotoxy(START_X, LINE_2_Y);
-    TFT_puts(buffer);
-
-    // fill rest of line with spaces (to override potential leftovers)
-    for (int i = strlen(buffer); i < BUFFER_SIZE; i++) {
-        TFT_putc(' ');
-    }
+    output_display_temp_offset(temp, 0);
 }
 
 /*
@@ -92,11 +86,40 @@ void output_display_temp(double temp) {
  * will display in line 2
  */
 void output_display_error(char *message) {
-    TFT_gotoxy(START_X, LINE_2_Y);
+    output_display_error_offset(message, 0);
+}
+
+/*
+ * Display an error message
+ *
+ * Will display in line 2 + offset
+ */
+void output_display_error_offset(char *message, int offset){
+    TFT_set_font_color(RED);
+    TFT_gotoxy(START_X, (LINE_2_Y + offset));
     TFT_puts(message);
+    TFT_set_font_color(WHITE);
 
     // fill rest of line with spaces (to override potential leftovers)
     for (int i = strlen(message); i < BUFFER_SIZE; i++) {
+        TFT_putc(' ');
+    }
+}
+
+/*
+ * displays a temperature
+ *
+ * will display in line 2 + offset
+ */
+void output_display_temp_offset(double temp, int offset){
+    char buffer[BUFFER_SIZE + 1] = { 0 };
+    sprintf(buffer, "Temperatur: %.1f Grad", temp);
+
+    TFT_gotoxy(START_X, (LINE_2_Y + offset));
+    TFT_puts(buffer);
+
+    // fill rest of line with spaces (to override potential leftovers)
+    for (int i = strlen(buffer); i < BUFFER_SIZE; i++) {
         TFT_putc(' ');
     }
 }
